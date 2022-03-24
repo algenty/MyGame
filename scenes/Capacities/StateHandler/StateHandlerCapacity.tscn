@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Capacities/StateHandler/StateHandlerCapacity.gd" type="Script" id=1]
+
+[node name="StateHandlerCapacity" type="Node2D"]
+script = ExtResource( 1 )
+owner_node = null
+_enable = null
+process_mode = null
+debug = null
+display = null
+rotate_with_owner = null
+default_state_name = null
+previous_state_on_exit = null

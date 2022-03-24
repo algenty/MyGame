@@ -1,0 +1,390 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://scenes/Actors/Actor.gd"
+}, {
+"base": "Capacity",
+"class": "AvailableEventDirectionsCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTAlwaysSucceed",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/decorator/behavior_tree_always_succeed.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTCallSimpleNodeFunction",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/leaves/bt_call_simple_func.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTCheckBlackboardProperty",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTInverter",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/decorator/behavior_tree_inverter.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTLeaf",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/leaves/behavior_tree_leaf.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTSelector",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/composite/behavior_tree_selector.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTSequence",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/composite/behavior_tree_sequence.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
+"class": "BTSetBlackBoardFromNodePropertyOrFunction",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/leaves/bt_set_blackboard_from_prop.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTree",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/behavior_tree.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "BehaviorTreeBaseNode",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/behavior_tree_base_node.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTreeNode",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/behavior_tree_node.gd"
+}, {
+"base": "Reference",
+"class": "BehaviorTreeResult",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/behavior_tree_result.gd"
+}, {
+"base": "Node",
+"class": "BlackBoard",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/blackboard.gd"
+}, {
+"base": "Capacity",
+"class": "CameraPlayerCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/CameraPlayer/CameraPlayerCapacity.gd"
+}, {
+"base": "Node2D",
+"class": "Capacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/Capacity.gd"
+}, {
+"base": "Actor",
+"class": "Character",
+"language": "GDScript",
+"path": "res://scenes/Actors/Characters/Character.gd"
+}, {
+"base": "State_old",
+"class": "CollectState",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Item/Collectable/CollectState.gd"
+}, {
+"base": "Item",
+"class": "Collectable",
+"language": "GDScript",
+"path": "res://scenes/Items/Collectable/Collectable.gd"
+}, {
+"base": "State_old",
+"class": "CollectedState",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Item/Collectable/CollectedState.gd"
+}, {
+"base": "Capacity",
+"class": "DirectionCapacty",
+"language": "GDScript",
+"path": "res://scenes/Capacities/AvailableEventDirections/Direction/DirectionCapacity.gd"
+}, {
+"base": "Character",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scenes/Actors/Enemy/Enemy.gd"
+}, {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://addons/godot-git-plugin/git_api.gdns"
+}, {
+"base": "Actor",
+"class": "Hero",
+"language": "GDScript",
+"path": "res://scenes/Actors/Heros/Hero.gd"
+}, {
+"base": "State_old",
+"class": "IdleNoStopState",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Idle/IdleState.gd"
+}, {
+"base": "State",
+"class": "IdleState",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Idle/Idle_No_Stop/IdleNoStopState.gd"
+}, {
+"base": "Capacity",
+"class": "InputEventDirectionCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/InputEventDirection/InputEventDirectionCapacity.gd"
+}, {
+"base": "Capacity",
+"class": "InputSetDirectionCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/InputSetDirection/InputSetDirectionCapacity.gd"
+}, {
+"base": "Node2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scenes/Items/Item.gd"
+}, {
+"base": "TileMap",
+"class": "LevelMap",
+"language": "GDScript",
+"path": "res://scenes/Levels/LevelMap.gd"
+}, {
+"base": "MoveState",
+"class": "MoveInputstate",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Move/Move_input/MoveInputState.gd"
+}, {
+"base": "MoveState",
+"class": "MoveOnTargetState",
+"language": "GDScript",
+"path": "res://trash/MoveOnTargetState.gd"
+}, {
+"base": "MoveState",
+"class": "MoveOnTile",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Move/Move_on_target/MoveOneTile.gd"
+}, {
+"base": "State_old",
+"class": "MoveState",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/Move/MoveState.gd"
+}, {
+"base": "MoveState",
+"class": "MoveWanderState",
+"language": "GDScript",
+"path": "res://trash/Move_wander/MoveWanderState.gd"
+}, {
+"base": "State",
+"class": "MyState",
+"language": "GDScript",
+"path": "res://script_templates/templateState.gd"
+}, {
+"base": "Navigation2D",
+"class": "NavGridMap2D",
+"language": "GDScript",
+"path": "res://scenes/Levels/GridMap2D.gd"
+}, {
+"base": "Capacity",
+"class": "PathFinderCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/PathFinder/PathFinderCapacity.gd"
+}, {
+"base": "Capacity",
+"class": "PathFinderSetDirectionCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/PathFinderSetDirection/PathFinderSetDirectionCapacity.gd"
+}, {
+"base": "Capacity",
+"class": "RadarBodyCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/RadarEventBody/RadarBodyCapacity.gd"
+}, {
+"base": "Capacity",
+"class": "RadarBodySens",
+"language": "GDScript",
+"path": "res://scenes/Capacities/RadarEventBody/Sens/RadarBodySens.gd"
+}, {
+"base": "Capacity",
+"class": "RandomSetDirectionCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.gd"
+}, {
+"base": "Node",
+"class": "RandomWeighted",
+"language": "GDScript",
+"path": "res://libraries/random_with_weight.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://scenes/Capacities/StateHandler/State/State.gd"
+}, {
+"base": "Capacity",
+"class": "StateHandlerCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/StateHandler/StateHandlerCapacity.gd"
+}, {
+"base": "Node2D",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/StateMachine.gd"
+}, {
+"base": "Node2D",
+"class": "State_old",
+"language": "GDScript",
+"path": "res://scenes/stateMachine/State.gd"
+}, {
+"base": "Node2D",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://Statics/Utils.gd"
+} ]
+_global_script_class_icons={
+"Actor": "",
+"AvailableEventDirectionsCapacity": "res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.svg",
+"BTAlwaysSucceed": "res://libraries/behavior_tree/decorator/behavior_tree_always_succeed.svg",
+"BTCallSimpleNodeFunction": "res://libraries/behavior_tree/leaves/bt_call_simple_func.svg",
+"BTCheckBlackboardProperty": "",
+"BTInverter": "res://libraries/behavior_tree/decorator/behavior_tree_inverter.svg",
+"BTLeaf": "res://libraries/behavior_tree/leaves/behavior_tree_leaf.svg",
+"BTSelector": "res://libraries/behavior_tree/composite/behavior_tree_selector.svg",
+"BTSequence": "res://libraries/behavior_tree/composite/behavior_tree_sequence.svg",
+"BTSetBlackBoardFromNodePropertyOrFunction": "res://libraries/behavior_tree/leaves/bt_set_blackboard_from_prop.svg",
+"BehaviorTree": "res://libraries/behavior_tree/behavior_tree.svg",
+"BehaviorTreeBaseNode": "",
+"BehaviorTreeNode": "",
+"BehaviorTreeResult": "",
+"BlackBoard": "res://libraries/behavior_tree/blackboard.svg",
+"CameraPlayerCapacity": "res://scenes/Capacities/CameraPlayer/CameraPlayerCapacity.svg",
+"Capacity": "",
+"Character": "",
+"CollectState": "",
+"Collectable": "",
+"CollectedState": "",
+"DirectionCapacty": "",
+"Enemy": "",
+"GitAPI": "",
+"Hero": "",
+"IdleNoStopState": "",
+"IdleState": "",
+"InputEventDirectionCapacity": "res://scenes/Capacities/InputEventDirection/InputEventDirectionCapacity.svg",
+"InputSetDirectionCapacity": "res://scenes/Capacities/InputSetDirection/InputSetDirectionCapacity.svg",
+"Item": "",
+"LevelMap": "",
+"MoveInputstate": "",
+"MoveOnTargetState": "",
+"MoveOnTile": "",
+"MoveState": "",
+"MoveWanderState": "",
+"MyState": "",
+"NavGridMap2D": "",
+"PathFinderCapacity": "res://scenes/Capacities/PathFinder/PathFinderCapacity.svg",
+"PathFinderSetDirectionCapacity": "res://scenes/Capacities/PathFinderSetDirection/PathFinderSetDirectionCapacity.svg",
+"RadarBodyCapacity": "res://scenes/Capacities/RadarEventBody/RadarBodyCapacity.svg",
+"RadarBodySens": "",
+"RandomSetDirectionCapacity": "res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.svg",
+"RandomWeighted": "",
+"State": "",
+"StateHandlerCapacity": "res://scenes/Capacities/StateHandler/StateHandlerCapacity.svg",
+"StateMachine": "",
+"State_old": "",
+"Utils": ""
+}
+
+[application]
+
+config/name="MyGame"
+run/main_scene="res://scenes/Main/Main.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+EVENTS="*res://Autoload/EVENTS.gd"
+DEBUG="*res://Autoload/DEBUG.gd"
+ONSCREEN="*res://Autoload/ui/ONSCREEN.tscn"
+CONSTANTS="*res://Autoload/CONSTANTS.gd"
+
+[display]
+
+window/size/width=500
+window/size/height=500
+window/size/test_width=1000
+window/size/test_height=1000
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[gdnative]
+
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+
+[global]
+
+pixel=false
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[layer_names]
+
+2d_render/layer_1="World"
+2d_render/layer_2="Collectables"
+2d_render/layer_3="Objects"
+2d_render/layer_4="Walls"
+2d_render/layer_5="Enemies"
+2d_render/layer_6="Players"
+2d_physics/layer_1="World"
+2d_physics/layer_2="Collectables"
+2d_physics/layer_3="Objects"
+2d_physics/layer_4="Walls"
+2d_physics/layer_5="Enemies"
+2d_physics/layer_6="Heroes"
+2d_physics/layer_7="Neutral"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+2d/snapping/use_gpu_pixel_snap=true
+environment/default_environment="res://default_env.tres"
+
+[world]
+
+2d/cell_size=16

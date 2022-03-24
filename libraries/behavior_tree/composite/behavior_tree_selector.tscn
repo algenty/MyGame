@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_selector.gd" type="Script" id=1]
+
+[node name="behavior_tree_selector" type="Node"]
+script = ExtResource( 1 )

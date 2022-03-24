@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Capacities/InputSetDirection/InputSetDirectionCapacity.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Capacities/InputEventDirection/InputEventDirectionCapacity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.tscn" type="PackedScene" id=3]
+
+[node name="InputSetDirectionCapacity" type="Node2D"]
+script = ExtResource( 1 )
+process_mode = 0
+debug = true
+
+[node name="InputEvent" parent="." instance=ExtResource( 2 )]
+
+[node name="AvailableEvent" parent="." instance=ExtResource( 3 )]
+debug = true

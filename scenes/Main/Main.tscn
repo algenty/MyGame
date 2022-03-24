@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Actors/Heros/Hero.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Items/Collectable/Collectable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/LevelMap_test.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Main/main.gd" type="Script" id=5]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 48.0 ]
+}
+
+[node name="Level" parent="." instance=ExtResource( 4 )]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Collectable" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 168, 328 )
+
+[node name="HeroPosition" type="Position2D" parent="."]
+position = Vector2( 216, 376 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Hero" parent="HeroPosition" instance=ExtResource( 1 )]
+collision/safe_margin = 0.08
+
+[node name="Position1" type="Position2D" parent="."]
+position = Vector2( 24, 24 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Position2" type="Position2D" parent="."]
+position = Vector2( 424, 24 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Position3" type="Position2D" parent="."]
+position = Vector2( 24, 136 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Position4" type="Position2D" parent="."]
+position = Vector2( 424, 136 )
+__meta__ = {
+"_edit_group_": true
+}

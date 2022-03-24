@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Capacities/InputEventDirection/InputEventDirectionCapacity.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Capacities/InputEventDirection/keyDown.png" type="Texture" id=2]
+
+[node name="InputEventDirectionCapacity" type="Node2D"]
+script = ExtResource( 1 )
+process_mode = 0
+debug = true
+
+[node name="KeyUp" type="Sprite" parent="."]
+position = Vector2( -1, 12 )
+rotation = -3.14159
+texture = ExtResource( 2 )
+
+[node name="KeyDown" type="Sprite" parent="."]
+position = Vector2( 0, 19 )
+texture = ExtResource( 2 )
+
+[node name="KeyLeft" type="Sprite" parent="."]
+position = Vector2( -8, 16 )
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="KeyRight" type="Sprite" parent="."]
+position = Vector2( 7, 15 )
+rotation = -1.5708
+texture = ExtResource( 2 )

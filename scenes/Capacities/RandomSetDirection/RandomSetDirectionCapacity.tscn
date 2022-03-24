@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.tscn" type="PackedScene" id=3]
+
+[node name="RandomSetDirectionCapacity" type="Node2D"]
+script = ExtResource( 1 )
+debug = true
+
+[node name="AvailableEvent" parent="." instance=ExtResource( 3 )]
+debug = true

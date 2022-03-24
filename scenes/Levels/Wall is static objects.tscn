@@ -1,0 +1,1031 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/env/Walls/Wall.tscn" type="PackedScene" id=1]
+
+[node name="Walls" type="TileMap"]
+format = 1
+
+[node name="Wall" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 16, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall2" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 32, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall3" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 48, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall4" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall5" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall6" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall7" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 112, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall8" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall9" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 144, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall10" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall11" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall12" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall13" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall14" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall15" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall16" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall17" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall18" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall19" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 304, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall20" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall21" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 336, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall22" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall23" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 368, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall24" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall25" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 400, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall26" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall27" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 432, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall28" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 448, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall29" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall30" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 480, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall31" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 496, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall32" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall33" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall34" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall35" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall36" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 112, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall37" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall38" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 144, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall39" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall40" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall41" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall42" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall43" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall44" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall45" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall46" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall47" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall48" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall49" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall50" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 304, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall51" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall52" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 336, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall53" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall54" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 368, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall55" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall56" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 400, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall57" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall58" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 432, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall59" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 448, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall60" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall61" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 480, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall62" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 496, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall63" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall64" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 528, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall65" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 544, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall66" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 560, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall67" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 576, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall68" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 592, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall69" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 608, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall70" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 624, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall71" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall72" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 528, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall73" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 544, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall74" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 560, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall75" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 576, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall76" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 592, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall77" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 608, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall78" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall79" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall80" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall81" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 16 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall82" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall83" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall84" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall85" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall86" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall87" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 192 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall88" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall89" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall90" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 240 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall91" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 256 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall92" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 224 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall93" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 208 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall94" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 304 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall95" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 320 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall96" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 288 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall97" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 272 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall98" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 352 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall99" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall100" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 336 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall101" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 624, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall102" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall103" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 656, 0 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall104" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall105" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall106" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall107" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 112, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall108" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall109" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 144, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall110" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall111" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall112" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall113" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall114" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall115" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall116" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall117" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall118" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 304, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall119" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall120" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall121" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 368, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall122" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall123" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 400, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall124" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall125" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 432, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall126" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 448, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall127" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 32 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall128" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall129" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall130" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall131" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall132" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall133" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall134" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall135" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall136" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall137" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall138" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall139" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall140" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall141" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall142" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall143" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall144" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall145" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall146" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall147" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall148" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall149" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall150" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall151" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall152" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall153" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall154" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall155" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall156" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall157" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall158" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall159" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall160" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall161" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall162" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall163" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall164" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall165" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall166" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall167" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall168" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 48 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall169" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 64 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall170" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 112 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall171" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall172" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall173" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 80 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall174" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 160 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall175" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 176, 144 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall176" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 32, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall177" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 48, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall178" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall179" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall180" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall181" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 112, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall182" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall183" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 144, 368 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall184" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 208, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall185" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall186" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall187" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall188" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall189" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall190" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 304, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall191" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall192" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall193" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 368, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall194" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall195" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 400, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall196" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall197" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 432, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall198" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 448, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall199" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 464, 176 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall200" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 224 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall201" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 560, 96 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall202" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224, 288 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall203" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 480, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall204" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 496, 128 )
+collision_layer = 8
+collision_mask = 48
+
+[node name="Wall205" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 224 )
+collision_layer = 8
+collision_mask = 48
