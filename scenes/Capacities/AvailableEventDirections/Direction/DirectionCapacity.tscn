@@ -10,9 +10,17 @@ font_data = ExtResource( 3 )
 
 [node name="Direction" type="Node2D"]
 script = ExtResource( 1 )
+display = false
 available_when_all_Raycast = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, 2 )
+enabled = true
+cast_to = Vector2( -10, 0 )
+collision_mask = 8
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2( 0, -2 )
 enabled = true
 cast_to = Vector2( -10, 0 )
 collision_mask = 8

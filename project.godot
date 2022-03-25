@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://scenes/Actors/Actor.gd"
 }, {
 "base": "Capacity",
+"class": "AutomaticPathFinderCapacity",
+"language": "GDScript",
+"path": "res://scenes/Capacities/AutomaticPathFinder/AutomaticPathFinderCapacity.gd"
+}, {
+"base": "Capacity",
 "class": "AvailableEventDirectionsCapacity",
 "language": "GDScript",
 "path": "res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.gd"
@@ -119,7 +124,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Capacities/AvailableEventDirections/Direction/DirectionCapacity.gd"
 }, {
-"base": "Character",
+"base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://scenes/Actors/Enemy/Enemy.gd"
@@ -256,6 +261,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "",
+"AutomaticPathFinderCapacity": "res://scenes/Capacities/AutomaticPathFinder/AutomaticPathFinderCapacity.svg",
 "AvailableEventDirectionsCapacity": "res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.svg",
 "BTAlwaysSucceed": "res://libraries/behavior_tree/decorator/behavior_tree_always_succeed.svg",
 "BTCallSimpleNodeFunction": "res://libraries/behavior_tree/leaves/bt_call_simple_func.svg",

@@ -3,15 +3,15 @@
 [ext_resource path="res://scenes/Actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Actors/Heros/Hero.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Actors/Heroes/Hero.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Capacities/AutomaticPathFinder/AutomaticPathFinderCapacity.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Capacities/StateHandler/State/State.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.tscn" type="PackedScene" id=7]
 
 [node name="Hero" instance=ExtResource( 1 )]
 collision_layer = 32
 collision_mask = 88
 script = ExtResource( 2 )
 debug = true
-init_max_speed = 100.0
+init_max_speed = 149.0
 group_name = "Heros"
 
 [node name="Sprite" parent="." index="0"]
@@ -34,24 +34,5 @@ owner_node = NodePath("../..")
 owner_function = "move"
 debug = true
 
-[node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 7 )]
-owner_min_distance_before_change = 16.0
-
-[node name="Front" parent="RandomSetDirectionCapacity/AvailableEvent" index="0"]
-weight = 40
-
-[node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
-weight = 5
-
-[node name="Left" parent="RandomSetDirectionCapacity/AvailableEvent" index="2"]
-weight = 30
-
-[node name="Right" parent="RandomSetDirectionCapacity/AvailableEvent" index="3"]
-weight = 30
-
-[editable path="RandomSetDirectionCapacity"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Front"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Back"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Left"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Right"]
+[node name="AutomaticPathFinderCapacity" parent="." index="4" instance=ExtResource( 4 )]
+owner_node = NodePath("..")

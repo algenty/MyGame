@@ -7,4 +7,4 @@ const GROUP_HEROES : String = GROUPS_OF_ACTORS[2]
 const GROUP_ENEMIES : String = GROUPS_OF_ACTORS[3]
 
 const GROUP_LEVELMAP : String = "LevelMap"
-const GROUP_NAVIGATION2D : String = "Navigation2D"
+#const GROUP_NAVIGATION2D : String = "Navigation2D"

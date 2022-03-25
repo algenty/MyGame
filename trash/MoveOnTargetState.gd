@@ -45,12 +45,12 @@ func process_target() -> void :
 		var size = get_move_path().size()
 		if _target != null :
 #			if _target.global_position != _target_position :
-				print("size ", get_move_path().size())
+#				print("size ", get_move_path().size())
 				var _start_pos = _owner.global_position
 				var _end_pos = _target.global_position
 				_target_position = _end_pos
 				_path = _nav2d.get_advanced_simple_path(_start_pos , _end_pos)
-				print(_path.size())
+#				print(_path.size())
 		else :
 			_path = []
 	else :

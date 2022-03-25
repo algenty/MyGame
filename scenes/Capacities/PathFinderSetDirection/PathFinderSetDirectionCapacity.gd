@@ -57,7 +57,8 @@ func init() -> void :
 			DEBUG.critical("Owner has no property [%s]" % owner_target_properties )
 
 	### SIGNALS
-	var __ = $PathFinderCapacity.connect("path_generated", self, "_on_pathfinder_path_generated")
+	var __ : int
+#	__ = $PathFinderCapacity.connect("path_generated", self, "_on_pathfinder_path_generated")
 	__ = self.connect("direction_changed", self, "_on_self_direction_changed")
 	__ = self.connect("target_changed", self, "_on_self_target_changed")
 	__ = self.connect("taken_path_changed", self, "_on_self_taken_path_changed")
@@ -74,10 +75,8 @@ func update(_delta : float = 0.0) -> void :
 		var __targeted : bool = _pathfinder.is_on_target(_owner_current_postion)
 		if not __targeted :
 			var __direction : Vector2 = _pathfinder.get_direction(_owner_current_postion)
-#			print("__direction ", __direction)
 			set_direction(__direction)
-			__targeted = _pathfinder.is_on_target(_owner_current_postion)
-#			print("__targeted ", __targeted)
+#			__targeted = _pathfinder.is_on_target(_owner_current_postion)
 		else :
 			emit_signal("path_achieved", _owner_current_postion)
 			set_physics_process(false)
@@ -86,7 +85,7 @@ func update(_delta : float = 0.0) -> void :
 
 
 func input(event):
-	if event is InputEventMouseButton :
+	if event is InputEventMouseButton and is_enable() :
 		if change_path_with_mouse && event.button_index == BUTTON_LEFT and event.pressed :
 			var __target = get_global_mouse_position()
 			if _pathfinder.is_valid_target(__target) :

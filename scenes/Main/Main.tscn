@@ -26,6 +26,7 @@ __meta__ = {
 
 [node name="Hero" parent="HeroPosition" instance=ExtResource( 1 )]
 collision/safe_margin = 0.08
+init_max_speed = 100.0
 
 [node name="Position1" type="Position2D" parent="."]
 position = Vector2( 24, 24 )

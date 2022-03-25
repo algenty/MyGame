@@ -40,8 +40,8 @@ func size() -> int :
 
 func rando() -> Object :
 	var __randi = _random.randi() %  (_weights.back())
-	print("_weights ", _weights)
-	print("__randi ", __randi)
+#	print("_weights ", _weights)
+#	print("__randi ", __randi)
 	for __i in range(_weights.size()) :
 		if __randi < _weights[__i] :
 #			print("Result ", _objects[__i])

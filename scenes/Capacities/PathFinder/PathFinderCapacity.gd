@@ -6,6 +6,7 @@ class_name PathFinderCapacity, "./PathFinderCapacity.svg"
 #const DRAW_COLOR = Color('#fff')
 const TEXTURE_EXCLUDE = "res://scenes/Capacities/PathFinder/exclude.svg"
 const MARGIN_DISTANCE = 3
+const NUMBER_OF_TRY_RANDOM_POINT = 4
 
 
 ### Exports
@@ -18,6 +19,7 @@ export(bool) var change_path_with_mouse : bool = true
 var _astart : AStar2D = AStar2D.new()
 var _room_size : int = 1000
 var _navigable_cells : Array = []
+var _navigable_points : Array = []
 var _levelmap : LevelMap
 var _global_origin : Vector2 setget set_origin, get_origin
 var _global_position : Vector2 setget set_origin, get_origin
@@ -25,7 +27,7 @@ var _global_target : Vector2 setget set_target, get_target
 var _path : Array = [] setget  , get_finded_path
 var _on_target : bool = false
 #var _marked_points : Array = []
-var _disables_uids : Array = []
+var _disabled_uid : Array = []
 var _disabled_points : Array = []
 var _disabled_pic_points : Array = []
 var _disabled_pic_object : Array = []
@@ -154,8 +156,10 @@ func get_direction(current_world_position : Vector2) -> Vector2 :
 #		__direction = __direction.round()
 	return __direction
 
+
 func get_current_point(current_world_position : Vector2) -> Vector2 :
 	return _levelmap.point_to_cell_center(current_world_position)
+
 
 func is_valid_target(current_world_position : Vector2) -> bool :
 #	var __center_point = get_current_point(current_world_position)
@@ -163,24 +167,23 @@ func is_valid_target(current_world_position : Vector2) -> bool :
 	var __uid = _levelmap.get_cell_uid(__cell)
 	return _astart.has_point(__uid)
 
+
 func is_on_next_point(current_world_position : Vector2, margin : float = MARGIN_DISTANCE ) -> bool :
 	var __current_point : Vector2 = get_current_point(current_world_position)
 	var __next_point : Vector2 = get_next_point(current_world_position)
 	return current_world_position.distance_to(__next_point) <= margin
 
+
 func is_on_target(current_world_position : Vector2, margin : float = MARGIN_DISTANCE ) -> bool :
-#	print("current_world_position ", current_world_position, "_global_target ", _global_target)
 	var __distance = current_world_position.distance_to(_global_target)
-#	print("distance_to ", __distance)
 	_on_target = __distance <= margin || _on_target
 	return _on_target || __distance <= margin
-#	var __current_point = get_current_point(current_world_position)
-#	var __next_point : Vector2 = get_next_point(__current_point)
-#	return __current_point == __next_point
+
 
 func get_distance_to_next_point(current_world_position : Vector2) -> float :
 	var __next_point : Vector2 = get_next_point(current_world_position)
 	return current_world_position.distance_to(__next_point)
+
 
 func _compute_path() -> void :
 	if _global_target && _global_origin :
@@ -190,7 +193,29 @@ func _compute_path() -> void :
 func has_path() -> bool :
 	return _path.size() > 0
 
-func find_path(from : Vector2 = _global_origin, to: Vector2 = _global_target, exclude_points : Array = []) -> Array :
+
+func get_random_available_points() -> Vector2 :
+	var __random = RandomNumberGenerator.new()
+	__random.randomize()
+	var __available : bool = false
+	var __world_point : Vector2
+	var __cell : Vector2
+	var __uid : int
+	var __index : int
+	var __try : int = NUMBER_OF_TRY_RANDOM_POINT
+	while (not __available || not __try) :
+		__try -= 1
+		__index = __random.randi() % _navigable_points.size()
+		__world_point = _navigable_points[__index]
+		__cell = _levelmap.point2cell(__world_point)
+		__uid = get_cell_uid(__cell)
+		__available = ! _astart.is_point_disabled(__uid)
+		if not __available :
+			DEBUG.warning("Point [%] is not available" % __world_point)
+	return __world_point
+
+
+func find_path(from : Vector2 = _global_origin, to: Vector2 = _global_target, exclude_points : Array = _disabled_points) -> Array :
 	var __from_rounded = _levelmap.point_to_cell_center(from)
 	var __from_cell = _levelmap.point2cell(__from_rounded)
 	var __from_cell_uid = get_cell_uid(__from_cell)
@@ -200,7 +225,7 @@ func find_path(from : Vector2 = _global_origin, to: Vector2 = _global_target, ex
 
 	disable_points_array(exclude_points)
 	var __path_cells : =  _astart.get_point_path(__from_cell_uid, __to_cell_uid)
-	reset_disabled_pic_points()
+	reset_disabled_points()
 	
 	var __path_points : Array = []
 
@@ -222,15 +247,17 @@ func disable_point(world_point : Vector2, disable = true) -> void :
 	var __rounded_point = _levelmap.point_to_cell_center(world_point)
 	var __cell = _levelmap.point2cell(world_point)
 	var __uid = get_cell_uid(__cell)
-	if disable && not _disables_uids.has(__rounded_point) :
-		_disables_uids.append(__uid)
+	if disable && not _disabled_uid.has(__rounded_point) :
+		_disabled_uid.append(__uid)
+		_disabled_points.append(__rounded_point)
 		_astart.set_point_disabled(__uid, true)
 		emit_signal("point_excluded", __rounded_point)
 		return
-	if  not disable && _disables_uids.has(__uid) && _astart.has_point(__uid) :
-		var __index = _disables_uids.find(__uid)
+	if  not disable && _disabled_uid.has(__uid) && _astart.has_point(__uid) :
+		var __index = _disabled_uid.find(__uid)
 		_astart.set_point_disabled(__uid, false)
-		_disables_uids.remove(__index)
+		_disabled_uid.remove(__index)
+		_disabled_points.remove(__index)
 		emit_signal("point_included", __rounded_point)
 
 
@@ -238,7 +265,7 @@ func is_disabled_point(world_point : Vector2) -> bool :
 	var __rounded_point = _levelmap.point_to_cell_center(world_point)
 	var __cell = _levelmap.point2cell(__rounded_point)
 	var __uid = _levelmap.get_cell_uid(__cell)
-	var __is_disabled = _disables_uids.has(__uid)
+	var __is_disabled = _disabled_uid.has(__uid)
 	return __is_disabled
 
 
@@ -248,8 +275,8 @@ func disable_points_array(world_point_array : Array, disable : bool = true) -> v
 		disable_point(__point, disable)
 
 
-func reset_disabled_pic_points() -> void :
-	disable_points_array(_disabled_pic_points, false)
+func reset_disabled_points() -> void :
+	disable_points_array(_disabled_points, false)
 
 
 func display_excluded_point(world_point : Vector2, disable = true) -> void :
@@ -283,6 +310,8 @@ func _astart_init(levelmap : LevelMap = _levelmap, __enable_diagonals : bool = e
 	## Add this cells to astart
 	for __cell in _navigable_cells :
 		var __uid = get_cell_uid(__cell)
+		var __world_point = levelmap.cell2point(__cell)
+		_navigable_points.append(__world_point)
 		_astart.add_point(__uid, __cell)
 	## Connect points
 	_astart_connect(_navigable_cells, __enable_diagonals)

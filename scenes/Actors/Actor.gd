@@ -6,7 +6,7 @@ export(bool) var debug = false
 export(Vector2) var init_direction : Vector2 = Vector2.DOWN
 export(float) var init_max_speed : float = 146
 export(bool) var init_enable_diagonals : bool = false
-export(String, "Actors", "Heros") var group_name = CONSTANTS.GROUP_ACTORS
+export(String, "Actors", "Heros", "Enemies") var group_name = CONSTANTS.GROUP_ACTORS
 export(bool) var is_bot : bool = false
 export(bool) var is_local :bool = true
 
@@ -51,8 +51,6 @@ func update_actor(_delta : float) -> void :
 
 ### ACCESSORS ##
 func set_direction(direction : Vector2) -> void :
-#	if ! move_enable_diagonals :
-#		direction = Vector2(stepify(direction.x, 1.0), stepify(direction.y, 1.0))
 	if direction != move_direction :
 		_move_previous_direction = move_direction
 		move_direction = direction
