@@ -6,6 +6,7 @@ var _direction : Vector2 setget set_direction, get_direction
 var _previous_direction : Vector2
 var _rounded_direction : Vector2
 var _default_direction : Vector2
+var _size : int setget set_size, get_size
 
 ### CONSTANTS ###
 #const INITIAL_DIRECTION := Vector2.LEFT
@@ -38,6 +39,7 @@ func update(_delta : float = 0.0) -> void :
 	var __available = true
 	for _child in get_children() :
 		if _child is RayCast2D :
+#			_child.force_raycast_update()
 			var __ray2D = ! _child.is_colliding()
 			if available_when_all_Raycast :
 				__available =  __ray2D
@@ -87,13 +89,22 @@ func get_direction() -> Vector2 :
 	return _direction
 
 
-func set_enable(value) -> void :
+func set_enable(value: bool) -> void :
 		$Label.visible = value && debug && display
 		$Sprite.visible = value && display
 		for __child in get_children() :
 			if __child is RayCast2D :
 				__child.enabled = value
 		.set_enable(value)
+
+func set_size(value : int) -> void :
+	for __child in get_children() :
+		if __child is RayCast2D :
+			__child.cast_to.x = value * -1
+	_size = value
+
+func get_size() -> int :
+	return _size
 
 ### BUILT-IN ###
 

@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Actors/Heros/Hero.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Actors/Heroes/Hero.png" type="Texture" id=3]
-[ext_resource path="res://scenes/Capacities/InputSetDirection/InputSetDirectionCapacity.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Capacities/PathFinderSetDirection/PathFinderSetDirectionCapacity.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Capacities/StateHandler/State/State.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.tscn" type="PackedScene" id=7]
 
@@ -36,57 +34,21 @@ owner_node = NodePath("../..")
 owner_function = "move"
 debug = true
 
-[node name="InputSetDirectionCapacity" parent="." index="4" instance=ExtResource( 4 )]
-_enable = false
-debug = false
-display = false
-
-[node name="InputEvent" parent="InputSetDirectionCapacity" index="0"]
-debug = false
-display = false
-
-[node name="Front" parent="InputSetDirectionCapacity/AvailableEvent" index="0"]
-debug = true
-
-[node name="Back" parent="InputSetDirectionCapacity/AvailableEvent" index="1"]
-_enable = false
-
-[node name="Left" parent="InputSetDirectionCapacity/AvailableEvent" index="2"]
-debug = true
-
-[node name="Right" parent="InputSetDirectionCapacity/AvailableEvent" index="3"]
-debug = true
-
-[node name="PathFinderSetDirection" parent="." index="5" instance=ExtResource( 5 )]
-_enable = false
-process_mode = 0
-display = false
-owner_target_properties = ""
-
-[node name="RandomSetDirectionCapacity" parent="." index="6" instance=ExtResource( 7 )]
+[node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 7 )]
 owner_min_distance_before_change = 16.0
 
 [node name="Front" parent="RandomSetDirectionCapacity/AvailableEvent" index="0"]
-weight = 50
+weight = 40
 
 [node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
-_enable = false
-debug = false
-display = false
+weight = 5
 
 [node name="Left" parent="RandomSetDirectionCapacity/AvailableEvent" index="2"]
-weight = 25
+weight = 30
 
 [node name="Right" parent="RandomSetDirectionCapacity/AvailableEvent" index="3"]
-weight = 25
+weight = 30
 
-[editable path="InputSetDirectionCapacity"]
-[editable path="InputSetDirectionCapacity/AvailableEvent"]
-[editable path="InputSetDirectionCapacity/AvailableEvent/Front"]
-[editable path="InputSetDirectionCapacity/AvailableEvent/Back"]
-[editable path="InputSetDirectionCapacity/AvailableEvent/Left"]
-[editable path="InputSetDirectionCapacity/AvailableEvent/Right"]
-[editable path="PathFinderSetDirection"]
 [editable path="RandomSetDirectionCapacity"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent/Front"]

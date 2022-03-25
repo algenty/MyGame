@@ -14,6 +14,8 @@ func add(obj, weight : int) -> void :
 		var __total_weight : int = _weights.back() if _weights.size() != 0 else 0
 		_objects.append(obj)
 		_weights.append(__total_weight + weight)
+#		print("Add ",_objects)
+#		print("Add ",_weights)
 
 
 func remove(obj) -> void :
@@ -38,8 +40,11 @@ func size() -> int :
 
 func rando() -> Object :
 	var __randi = _random.randi() %  (_weights.back())
+	print("_weights ", _weights)
+	print("__randi ", __randi)
 	for __i in range(_weights.size()) :
 		if __randi < _weights[__i] :
+#			print("Result ", _objects[__i])
 			return _objects[__i]
 	DEBUG.error("Error not possible")
 	return null

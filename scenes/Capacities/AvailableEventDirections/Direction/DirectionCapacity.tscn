@@ -10,15 +10,9 @@ font_data = ExtResource( 3 )
 
 [node name="Direction" type="Node2D"]
 script = ExtResource( 1 )
+available_when_all_Raycast = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 0, -4 )
-enabled = true
-cast_to = Vector2( -10, 0 )
-collision_mask = 8
-
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-position = Vector2( 0, 4 )
 enabled = true
 cast_to = Vector2( -10, 0 )
 collision_mask = 8
@@ -26,7 +20,6 @@ collision_mask = 8
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -8, 0 )
 rotation = 1.5708
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Direction" type="Position2D" parent="."]

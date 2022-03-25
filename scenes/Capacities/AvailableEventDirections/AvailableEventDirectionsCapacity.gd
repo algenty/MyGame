@@ -3,22 +3,28 @@ class_name AvailableEventDirectionsCapacity, "./AvailableEventDirectionsCapacity
 
 signal available_directions_changed(directions_array)
 
-### VARIABLES ####
+### VARIABLES
 var _available_directions : Array = []
 var _available_names : Array = []
 var _available_childs : Array = []
+var _available_weights : Array = []
 var _random = RandomNumberGenerator.new()
 var _random_weighted = RandomWeighted.new()
 var initial_direction : Vector2 = Vector2.DOWN
+
+### EXPORTS
+export(int) var init_raycast_size : int = 10
 
 ### INIT  & EXIT ###
 func init() -> void :
 	yield(get_parent(), "ready")
 	### CHECKS
 	assert( connect("available_directions_changed", self, "_on_self_available_directions_changed") == 0)
-	for child in get_children() :
-		if ! (child is DirectionCapacty) :
-			DEBUG.critical("[%s] is not a DirectionCapacty in [%s]" % [child.name, name])
+	for __child in get_children() :
+		if ! __child is DirectionCapacty :
+			DEBUG.critical("[%s] is not a DirectionCapacty in [%s]" % [__child.name, name])
+		elif __child is DirectionCapacty :
+			__child.set_size(init_raycast_size)
 	var _owner : Object = get_owner()
 	if rotate_with_owner :
 		# Init direction angle
@@ -42,9 +48,9 @@ func free() -> void :
 
 
 func update(_delta : float = 0.0) -> void :
-#	var _hash = _available_directions.hash()
+	var __hash = _available_names.hash()
 	var __changed = false
-	var __new_available_direction = []
+	_clear_direction()
 	for __child in get_children() :
 		if __child is DirectionCapacty :
 			var __available = __child.is_available()
@@ -54,7 +60,8 @@ func update(_delta : float = 0.0) -> void :
 				__changed = _remove_direction(__child) || __changed
 		else :
 			DEBUG.critical("Only DirectionCapacty childs are valid")
-	if __changed :
+#	if __changed :
+	if _available_names.hash() != __hash :
 		emit_signal("available_directions_changed", _available_directions)
 	.update()
 
@@ -68,25 +75,35 @@ func get_available_directions() -> Array :
 	return _available_directions
 
 
+func _clear_direction() -> void :
+	_available_directions = []
+	_available_names = []
+	_available_weights = []
+	_available_childs = []
+	
+
 func _add_direction(child : DirectionCapacty) -> bool :
-	var direction = child.get_direction()
-	var name = child.get_name()
-	var _index = _available_directions.find(direction)
+	var __direction = child.get_direction()
+	var __name = child.get_name()
+	var __weight = child.get_weight()
+	var _index = _available_directions.find(__direction)
 	if _index == -1 : 
-		_available_directions.append(direction)
-		_available_names.append(name)
+		_available_directions.append(__direction)
+		_available_names.append(__name)
+		_available_weights.append(__weight)
 		_available_childs.append(child)
 		return true
 	return false
 
 
 func _remove_direction(child : DirectionCapacty) -> bool :
-	var direction = child.get_direction()
-	var name = child.get_name()
-	var _index = _available_directions.find(direction)
+	var __direction = child.get_direction()
+	var __name = child.get_name()
+	var _index = _available_directions.find(__direction)
 	if _index != -1 : 
 		_available_directions.remove(_index)
 		_available_names.remove(_index)
+		_available_weights.remove(_index)
 		_available_childs.remove(_index)
 		return true
 	return false
@@ -110,15 +127,19 @@ func get_random_direction(with_weight : bool = true) -> Vector2 :
 	if not process_mode : 
 		update() 
 	var __size = _available_directions.size()
+	if __size == 1 : return _available_directions[0]
 	if __size :
 		if not with_weight :
 			var __index = _random.randi() % (__size)
 			return _available_directions[__index]
 		else :
 			_random_weighted.clear()
-			for __child in _available_childs :
-				_random_weighted.add(__child.get_direction(), __child.get_weight())
-			return _random_weighted.rando()
+			for __i in range(_available_directions.size()) :
+				_random_weighted.add(_available_directions[__i], _available_weights[__i])
+			var __result = _random_weighted.rando()
+			var __i = _available_directions.find(__result)
+			print("Selected ", _available_names[__i])
+			return __result
 	return Vector2.ZERO
 
 
@@ -132,7 +153,9 @@ func _on_self_available_directions_changed(available_dirs : Array) -> void :
 
 func _on_owner_direction_changed(direction : Vector2) -> void :
 	if rotate_with_owner :
+		print("Rotate")
 		rotation = direction.angle() - initial_direction.angle()
 		for __child in get_children() :
 			if __child is DirectionCapacty :
 				__child.compute_default_direction()
+				print("Name : ", __child.name, " Dir. : ", str(__child.get_direction()))

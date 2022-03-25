@@ -68,11 +68,11 @@ func get_direction() -> Vector2 :
 	return _direction
 
 
-func random_direction(array_directions : Array = _available_directions) -> void :
-	var __size = array_directions.size()
-	if array_directions.size() :
-		var __index = _random.randi() % (__size)
-		set_direction(array_directions[__index])
+#func random_direction(array_directions : Array = _available_directions) -> void :
+#	var __size = array_directions.size()
+#	if array_directions.size() :
+#		var __index = _random.randi() % (__size)
+#		set_direction(array_directions[__index])
 
 ### BUIT-IT ###
 #IN MOTHER CLASS CAPACITY
@@ -83,11 +83,18 @@ func _on_available_event_available_directions_changed(new_directions_array : Arr
 	var __new_position : Vector2 = get_owner().global_position
 	var __distance = __new_position.distance_to(_old_position)
 	if get_direction() == Vector2.ZERO || __distance  >= owner_min_distance_before_change || _old_position == __new_position :
-		var __old_dir : Vector2= get_direction()
+		print("Distance ", __distance)
+		print("curr. Dir. ", get_direction())
+#		var __old_dir : Vector2= get_direction()
 #		random_direction()
 		var new_direction : Vector2 = $AvailableEvent.get_random_direction(ramdon_with_weight)
-		set_direction(new_direction)
-		if get_direction() !=  __old_dir :
+		if new_direction == get_direction() * -1.0 :
+			print("New Dir. : ", new_direction)
+			print ("Avail. Dirs : ",$AvailableEvent._available_directions)
+			print ("Avail. names : ",$AvailableEvent._available_names)
+#			breakpoint
+		if get_direction() !=  new_direction :
+			set_direction(new_direction)
 			_old_position = __new_position
 
 
