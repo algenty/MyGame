@@ -79,9 +79,10 @@ func update(_delta : float = 0.0) -> void :
 #			__targeted = _pathfinder.is_on_target(_owner_current_postion)
 		else :
 			emit_signal("path_achieved", _owner_current_postion)
-			set_physics_process(false)
+#			set_physics_process(false)
 	else : 
-		set_physics_process(false)
+#		set_physics_process(false)
+		pass
 
 
 func input(event):

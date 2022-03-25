@@ -92,9 +92,9 @@ func process_path() -> void :
 		emit_signal("path_generated", _path)
 
 
-func set_target(value : Vector2) -> void :
+func set_target(value : Vector2, force = false) -> void :
 	var _new_target := value
-	if _new_target != _global_target :
+	if _new_target != _global_target || force:
 		_global_target = _new_target
 		process_path()
 
@@ -211,7 +211,7 @@ func get_random_available_points() -> Vector2 :
 		__uid = get_cell_uid(__cell)
 		__available = ! _astart.is_point_disabled(__uid)
 		if not __available :
-			DEBUG.warning("Point [%] is not available" % __world_point)
+			DEBUG.warning("Point [%s] is not available" % __world_point)
 	return __world_point
 
 
@@ -225,7 +225,7 @@ func find_path(from : Vector2 = _global_origin, to: Vector2 = _global_target, ex
 
 	disable_points_array(exclude_points)
 	var __path_cells : =  _astart.get_point_path(__from_cell_uid, __to_cell_uid)
-	reset_disabled_points()
+#	reset_disabled_points()
 	
 	var __path_points : Array = []
 

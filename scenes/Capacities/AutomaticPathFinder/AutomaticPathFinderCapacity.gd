@@ -34,8 +34,9 @@ func init() -> void :
 			DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
 	
 	### Connects
-	var __ = $Timer.connect("timeout", self, "_on_timer_timeout")
-	__ = $PathFinderSetDirection.connect("path_achieved", self, "_on_pathfinder_path_achieved")
+	var __ : int
+#	__ = $Timer.connect("timeout", self, "_on_timer_timeout")
+#	__ = $PathFinderSetDirection.connect("path_achieved", self, "_on_pathfinder_path_achieved")
 	.init()
 
 
@@ -55,10 +56,10 @@ func set_enable(value : bool) -> void :
 		$Timer.stop()
 
 
-func set_target(value : Vector2) -> void :
-	if target != value :
+func set_target(value : Vector2, force : bool = false) -> void :
+	if target != value || force :
 		target = value
-		$PathFinderSetDirection.set_target(value)
+		$PathFinderSetDirection.set_target(value, force)
 		emit_signal("target_changed", value)
 
 func set_direction(value : Vector2) -> void :
@@ -80,7 +81,8 @@ func get_target() -> Vector2 :
 func refresh_obstables() -> void :
 	obstables_vectors = []
 	$PathFinderSetDirection/PathFinderCapacity.reset_disabled_points()
-	for obj in get_tree().get_nodes_in_group(extented_obstacle_group) :
+	var enemies = get_tree().get_nodes_in_group(extented_obstacle_group)
+	for obj in enemies :
 		if obj.get(POSITION_PROPERTY) != null :
 			obstables_vectors.append(obj[POSITION_PROPERTY])
 			$PathFinderSetDirection/PathFinderCapacity.disable_point(obj[POSITION_PROPERTY])
@@ -90,16 +92,18 @@ func refresh_obstables() -> void :
 
 func refresh_target() -> void :
 	var level_map : LevelMap = get_tree().get_nodes_in_group(CONSTANTS.GROUP_LEVELMAP)[0]
-	var target = $PathFinderSetDirection/PathFinderCapacity.get_random_available_points()
-	set_target(target)
+	var __target = $PathFinderSetDirection/PathFinderCapacity.get_random_available_points()
+	set_target(__target)
 
 ### EVENTS ###
-func _on_timer_timeout() -> void :
-	refresh_obstables()
+func _on_PathFinderSetDirection_path_achieved(position):
+	target = Vector2.ZERO
 	refresh_target()
-	
-func _on_pathfinder_path_achieved() -> void :
-	$Timer.stop()
-	_on_timer_timeout()
-	$Timer.start()
-	
+
+
+func _on_Timer_timeout():
+	refresh_obstables()
+	if target == Vector2.ZERO :
+		refresh_target()
+	else :
+		set_target(target, true)

@@ -6,11 +6,12 @@
 [ext_resource path="res://scenes/Actors/Enemy/Enemy.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Actors/Enemies/Enemies.png" type="Texture" id=5]
 
-[node name="Enemy" instance=ExtResource( 1 )]
+[node name="Enemy" groups=["Enemies"] instance=ExtResource( 1 )]
 collision_layer = 16
 collision_mask = 40
 script = ExtResource( 4 )
-init_max_speed = 100.0
+debug = true
+init_max_speed = 80.0
 group_name = "Enemies"
 is_bot = true
 

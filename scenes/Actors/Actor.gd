@@ -30,6 +30,7 @@ signal direction_changed(new_direction)
 func init_actor() -> void :
 	### GROUPS
 	add_to_group(CONSTANTS.GROUP_ACTORS)
+	state_handler = $StateHandlerCapacity
 	
 	### MOVE VALUES
 	move_max_speep = init_max_speed
@@ -44,7 +45,7 @@ func init_actor() -> void :
 	__ = state_handler.connect("state_changed", self, "_on_actor_state_changed")
 	
 func free_actor() -> void : 
-	remove_from_group(CONSTANTS.GROUP_ACTORS)
+	get_tree().remove_from_group(CONSTANTS.GROUP_ACTORS)
 	
 func update_actor(_delta : float) -> void :
 	pass
@@ -56,7 +57,8 @@ func set_direction(direction : Vector2) -> void :
 		move_direction = direction
 		var new_velocity = compute_velocity(direction)
 		set_velocity(new_velocity)
-		state_handler.set_state("Move")
+		if state_handler :
+			state_handler.set_state("Move")
 		emit_signal("direction_changed", move_direction)
 
 
@@ -145,7 +147,7 @@ func update_animation() -> void :
 
 
 ### STATES/ACTIONS ###
-func move(_delta :float = 0.0, velocity := move_velocity) -> bool :
+func move(_delta :float = get_process_delta_time(), velocity := move_velocity) -> bool :
 	var _old_pos : Vector2 = position
 	var _velocity = move_and_slide(velocity)
 	if _velocity.length() == 0 :
@@ -155,5 +157,5 @@ func move(_delta :float = 0.0, velocity := move_velocity) -> bool :
 		return false
 	return true
 
-func idle(_delta :float = 0.0) -> bool :
+func idle(_delta :float = get_process_delta_time()) -> bool :
 	return true
