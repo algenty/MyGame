@@ -27,6 +27,8 @@ func collect(my_collectable : Collectable) -> bool :
 	return true
 	
 func idle(delta :float = get_process_delta_time()) -> bool :
-	set_direction(get_direction() * -1)
-	.idle(delta)
-	return false
+	if get_direction() != Vector2.ZERO :
+		set_direction( get_direction() * -1)
+	else :
+		set_direction( Vector2(-1,0))
+	return true

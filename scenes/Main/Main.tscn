@@ -26,6 +26,7 @@ __meta__ = {
 }
 
 [node name="Hero" parent="HeroPosition" instance=ExtResource( 1 )]
+debug = false
 
 [node name="Position1" type="Position2D" parent="."]
 position = Vector2( 24, 24 )
@@ -34,9 +35,12 @@ __meta__ = {
 }
 
 [node name="Enemy" parent="Position1" instance=ExtResource( 3 )]
+debug = false
+init_max_speed = 60.0
 
 [node name="Enemy2" parent="Position1" instance=ExtResource( 3 )]
-init_max_speed = 50.0
+debug = false
+init_max_speed = 60.0
 
 [node name="Position2" type="Position2D" parent="."]
 position = Vector2( 424, 24 )
@@ -45,9 +49,12 @@ __meta__ = {
 }
 
 [node name="Enemy" parent="Position2" instance=ExtResource( 3 )]
+debug = false
+init_max_speed = 65.0
 
 [node name="Enemy2" parent="Position2" instance=ExtResource( 3 )]
-init_max_speed = 50.0
+debug = false
+init_max_speed = 65.0
 
 [node name="Position3" type="Position2D" parent="."]
 position = Vector2( 24, 136 )
@@ -56,7 +63,12 @@ __meta__ = {
 }
 
 [node name="Enemy" parent="Position3" instance=ExtResource( 3 )]
-init_max_speed = 90.0
+debug = false
+init_max_speed = 70.0
+
+[node name="Enemy2" parent="Position3" instance=ExtResource( 3 )]
+debug = false
+init_max_speed = 70.0
 
 [node name="Position4" type="Position2D" parent="."]
 position = Vector2( 424, 136 )
@@ -65,4 +77,7 @@ __meta__ = {
 }
 
 [node name="Enemy" parent="Position4" instance=ExtResource( 3 )]
-init_max_speed = 60.0
+debug = false
+
+[node name="Enemy2" parent="Position4" instance=ExtResource( 3 )]
+debug = false

@@ -36,4 +36,4 @@ debug = true
 
 [node name="AutomaticPathFinderCapacity" parent="." index="4" instance=ExtResource( 4 )]
 owner_node = NodePath("..")
-refresh_path_every_seconds = 0.2
+refresh_path_every_seconds = 0.1
