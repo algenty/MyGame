@@ -9,7 +9,6 @@ export(bool) var init_enable_diagonals : bool = false
 export(String, "Actors", "Heros", "Enemies") var group_name = CONSTANTS.GROUP_ACTORS
 export(bool) var is_bot : bool = false
 export(bool) var is_local : bool = true
-
 export (bool) var is_dying : bool = false
 export (bool) var is_dead : bool = false
 

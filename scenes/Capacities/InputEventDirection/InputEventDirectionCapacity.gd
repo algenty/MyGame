@@ -31,12 +31,17 @@ func init() -> void :
 	### Init states
 	for key in keys :
 		_keys_state[key] = _RELEASED
+	
 	### Init Sprites
+	init_when_enable()
+	.init()
+
+func init_when_enable() -> void :
 	if not is_display()  or not is_enable() :
 		for _child in get_children() :
 			if _child is Sprite and "Key".is_subsequence_of(_child.name) :
 				_child.visible = false
-	.init()
+
 
 func free() -> void :
 	.free()
@@ -64,6 +69,7 @@ func set_direction(value : Vector2) -> void :
 		direction = value
 		emit_signal("input_direction_changed", direction)
 
+
 func get_direction() -> Vector2 :
 	return direction
 
@@ -84,6 +90,13 @@ func get_key_state(key) -> bool :
 	else :
 		DEBUG.error("keys [%s] is not defined" % key)
 	return false
+
+
+func set_enable(value : bool) -> void :
+	init_when_enable()
+	.set_enable(value)
+	print(name," Enable ", _enable)
+
 
 ### BUIT-IT ###
 #func _input(event):

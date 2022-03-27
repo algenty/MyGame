@@ -76,7 +76,6 @@ func is_debug()  -> bool :
 
 ### BUIT-IT ###
 func _ready():
-#	if name == "StateHandlerCapacity" : breakpoint
 	init()
 
 func _exit_tree():

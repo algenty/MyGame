@@ -8,7 +8,7 @@ script = ExtResource( 1 )
 
 [node name="PathFinderSetDirection" parent="." instance=ExtResource( 2 )]
 owner_node = NodePath("..")
-process_mode = null
+process_mode = 1
 _debug = null
 _display = null
 rotate_with_owner = null

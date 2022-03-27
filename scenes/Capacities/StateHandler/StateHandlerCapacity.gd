@@ -46,12 +46,13 @@ func finish_state(value : State = get_state()) -> void :
 		emit_signal("state_changed", __cur_state)
 	else :
 		set_state(default_state_name)
-	
+
 
 func get_state() -> State :
 	if _stack_states.size() > 0 :
 		return _stack_states.back()
 	else : return null
+
 
 func get_state_name() -> String :
 	var __state = _stack_states.back()
@@ -67,6 +68,7 @@ func _exit_state(value : State = get_state()) -> void :
 				DEBUG.warning("State in stack must be the same : [%s] [%s]" % [_state_in_back.get_name(), value.get_name()])
 	value.exit()
 
+
 func _enter_state(value : State = get_state()) -> void :
 	var __state_in_back : State = _stack_states.back() if _stack_states.size() else null
 	if __state_in_back !=null and __state_in_back.get_name() == value.get_name() :
@@ -80,25 +82,26 @@ func _enter_state(value : State = get_state()) -> void :
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
-	var __agent = owner_node
-	if !__agent : DEBUG.critical("Owner node not valid")
-	var __ = self.connect("state_changed", self, "_on_self_state_changed")
-	var __first : State
-	for __child in get_children() :
-		if __child is State :
-			if __first == null :
-				if default_state_name == null :
-					__first = __child
-					default_state_name = __first.get_name()
-				elif default_state_name == __child.get_name() :
-					__first = __child 
-			__ = __child.connect("state_finished", self, "_on_State_state_finished")
-			__child.set_owner(__agent)
-		else :
-			DEBUG.critical("Only Children State are available")
-	if __first == null : 
-		DEBUG.critical("No state defined or default state name not exits")
-	set_state(__first)
+	if is_enable() :
+		var __agent = owner_node
+		if !__agent : DEBUG.critical("Owner node not valid")
+		var __ = self.connect("state_changed", self, "_on_self_state_changed")
+		var __first : State
+		for __child in get_children() :
+			if __child is State :
+				if __first == null :
+					if default_state_name == null :
+						__first = __child
+						default_state_name = __first.get_name()
+					elif default_state_name == __child.get_name() :
+						__first = __child 
+				__ = __child.connect("state_finished", self, "_on_State_state_finished")
+				__child.set_owner(__agent)
+			else :
+				DEBUG.critical("Only Children State are available")
+		if __first == null : 
+			DEBUG.critical("No state defined or default state name not exits")
+		set_state(__first)
 	.init()
 
 func free() -> void :

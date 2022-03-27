@@ -29,9 +29,9 @@ func tick(delta:float, blackboard: BlackBoard, result:BehaviorTreeResult) -> voi
 		result.set_failure()
 		return
 	var property = blackboard.data.get(blackboard_property_name)
-	if !property:
-		result.set_failure()
-		return
+#	if property == null:
+#		result.set_failure()
+#		return
 	if invert_property_value :
 		property =  ! property
 	_node.call(node_function_name, property)

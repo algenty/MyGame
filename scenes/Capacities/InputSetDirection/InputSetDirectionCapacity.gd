@@ -27,8 +27,6 @@ func init() -> void :
 	### INIT CHILD
 	_input_event = $InputEvent
 	_available_event = $AvailableEvent
-	_input_event.set_enable(is_enable())
-	_available_event.set_enable(is_enable())
 
 	var __agent = get_owner()
 	_input_event.set_owner(__agent)
@@ -45,6 +43,7 @@ func init() -> void :
 	var __ = _input_event.connect("input_direction_changed", self, "_on_input_event_input_direction_changed")
 	__ = _available_event.connect("available_directions_changed", self, "_on_available_event_available_directions_changed")
 	.init()
+
 
 func free() -> void :
 	.free()
@@ -65,6 +64,12 @@ func set_direction(value : Vector2) -> void :
 
 func get_direction() -> Vector2 :
 	return _direction
+
+func set_enable(value : bool) -> void :
+	$InputEvent.set_enable(value)
+	$AvailableEvent.set_enable(value)
+	.set_enable(value)
+	print(name," Enable ", _enable)
 
 ### BUIT-IT ###
 #IN MOTHER CLASS CAPACITY

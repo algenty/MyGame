@@ -27,14 +27,14 @@ func init() -> void :
 	if is_enable() :
 		$Timer.wait_time = refresh_path_every_seconds
 		$Timer.start()
-		var __agent = get_owner()
 
-		### CHECKS
-		if owner_method_direction != null && ! owner_method_direction.empty() :
-			if __agent.has_method(owner_method_direction) :
-				_owner_method_direction_available = true
-			else :
-				DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
+	### CHECKS
+	var __agent = get_owner()
+	if owner_method_direction != null && ! owner_method_direction.empty() :
+		if __agent.has_method(owner_method_direction) :
+			_owner_method_direction_available = true
+		else :
+			DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
 
 
 func free() -> void :
@@ -51,6 +51,9 @@ func set_enable(value : bool) -> void :
 		$Timer.start()
 	else :
 		$Timer.stop()
+	$PathFinderSetDirection.set_enable(value)
+	.set_enable(value)
+	print(name," Enable ", _enable)
 
 
 func set_target(value : Vector2, force : bool = false) -> void :
@@ -88,7 +91,7 @@ func refresh_obstables() -> void :
 
 
 func refresh_target() -> void :
-	var level_map : LevelMap = get_tree().get_nodes_in_group(CONSTANTS.GROUP_LEVELMAP)[0]
+#	var level_map : LevelMap = get_tree().get_nodes_in_group(CONSTANTS.GROUP_LEVELMAP)[0]
 	var __target = $PathFinderSetDirection/PathFinderCapacity.get_random_available_points()
 	set_target(__target)
 

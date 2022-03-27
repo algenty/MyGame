@@ -10,6 +10,7 @@ process_mode = 0
 _display = false
 
 [node name="InputEvent" parent="." instance=ExtResource( 2 )]
+process_mode = 1
 
 [node name="AvailableEvent" parent="." instance=ExtResource( 3 )]
 _display = false
