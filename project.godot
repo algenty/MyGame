@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://libraries/behavior_tree/leaves/bt_call_simple_func.gd"
 }, {
 "base": "BehaviorTreeBaseNode",
+"class": "BTCallSimpleNodeFunctionWithProp",
+"language": "GDScript",
+"path": "res://libraries/behavior_tree/leaves/bt_call_simple_func_prop.gd"
+}, {
+"base": "BehaviorTreeBaseNode",
 "class": "BTCheckBlackboardProperty",
 "language": "GDScript",
 "path": "res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.gd"
@@ -67,7 +72,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "BehaviorTree",
 "language": "GDScript",
-"path": "res://libraries/behavior_tree/behavior_tree.gd"
+"path": "res://libraries/behavior_tree/BehaviorTree.gd"
 }, {
 "base": "BehaviorTreeNode",
 "class": "BehaviorTreeBaseNode",
@@ -265,13 +270,14 @@ _global_script_class_icons={
 "AvailableEventDirectionsCapacity": "res://scenes/Capacities/AvailableEventDirections/AvailableEventDirectionsCapacity.svg",
 "BTAlwaysSucceed": "res://libraries/behavior_tree/decorator/behavior_tree_always_succeed.svg",
 "BTCallSimpleNodeFunction": "res://libraries/behavior_tree/leaves/bt_call_simple_func.svg",
-"BTCheckBlackboardProperty": "",
+"BTCallSimpleNodeFunctionWithProp": "res://libraries/behavior_tree/leaves/bt_call_simple_func_prop.svg",
+"BTCheckBlackboardProperty": "res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.svg",
 "BTInverter": "res://libraries/behavior_tree/decorator/behavior_tree_inverter.svg",
 "BTLeaf": "res://libraries/behavior_tree/leaves/behavior_tree_leaf.svg",
 "BTSelector": "res://libraries/behavior_tree/composite/behavior_tree_selector.svg",
 "BTSequence": "res://libraries/behavior_tree/composite/behavior_tree_sequence.svg",
 "BTSetBlackBoardFromNodePropertyOrFunction": "res://libraries/behavior_tree/leaves/bt_set_blackboard_from_prop.svg",
-"BehaviorTree": "res://libraries/behavior_tree/behavior_tree.svg",
+"BehaviorTree": "res://libraries/behavior_tree/BehaviorTree.svg",
 "BehaviorTreeBaseNode": "",
 "BehaviorTreeNode": "",
 "BehaviorTreeResult": "",

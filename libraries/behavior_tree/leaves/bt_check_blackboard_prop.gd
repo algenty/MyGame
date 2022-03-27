@@ -1,7 +1,7 @@
 # checks blackboard for property
 # if property doesn't exist, is null, "" (empty string) or False then the
 # results are FAILURE.  Otherwise the results are SUCCESS.
-class_name BTCheckBlackboardProperty
+class_name BTCheckBlackboardProperty, "res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.svg"
 extends BehaviorTreeBaseNode
 
 export var blackboard_property_name: String

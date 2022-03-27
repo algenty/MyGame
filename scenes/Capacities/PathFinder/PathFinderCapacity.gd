@@ -31,7 +31,7 @@ var _disabled_uid : Array = []
 var _disabled_points : Array = []
 var _disabled_pic_points : Array = []
 var _disabled_pic_object : Array = []
-var _exclude_texture = preload(TEXTURE_EXCLUDE) if display else null
+var _exclude_texture = preload(TEXTURE_EXCLUDE) if .is_display() else null
 onready var _line2D = $Line2D
 
 ### Signals
@@ -41,28 +41,29 @@ signal point_included(world_point)
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
-	if tilemaps_group == null || tilemaps_group.empty() :
-		DEBUG.critical("No group defined for tilemap")
-	var __levelmaps : Array = get_tree().get_nodes_in_group(tilemaps_group)
-	if __levelmaps.empty() :
-		DEBUG.critical("No tilemap/levelmap in group [%s]" % tilemaps_group)
-		return
-	if __levelmaps.size() != 1 :
-		DEBUG.critical("Only 1 levelMap is supported")
-	_levelmap = __levelmaps[0]
-	# Inits childs
-	$Line2D.set_as_toplevel(true)
-	# Connects
-	var __ = connect("path_generated", self, "_on_self_path_generated")
-	__ = connect("point_excluded", self, "_on_self_point_excluded")
-	__ = connect("point_included", self, "_on_self_point_included")
-	# Astar
-	_astart_init()
-	
-	# origin is owner
-	var __agent = get_owner()
-	if __agent : set_origin(__agent.global_position)
 	.init()
+	if is_enable() :
+		if tilemaps_group == null || tilemaps_group.empty() :
+			DEBUG.critical("No group defined for tilemap")
+		var __levelmaps : Array = get_tree().get_nodes_in_group(tilemaps_group)
+		if __levelmaps.empty() :
+			DEBUG.critical("No tilemap/levelmap in group [%s]" % tilemaps_group)
+			return
+		if __levelmaps.size() != 1 :
+			DEBUG.critical("Only 1 levelMap is supported")
+		_levelmap = __levelmaps[0]
+		# Inits childs
+		$Line2D.set_as_toplevel(true)
+		# Connects
+		var __ = connect("path_generated", self, "_on_self_path_generated")
+		__ = connect("point_excluded", self, "_on_self_point_excluded")
+		__ = connect("point_included", self, "_on_self_point_included")
+		# Astar
+		_astart_init()
+		
+		# origin is owner
+		var __agent = get_owner()
+		if __agent : set_origin(__agent.global_position)
 
 
 func free() -> void :
@@ -71,15 +72,13 @@ func free() -> void :
 
 func update(_delta : float = 0.0) -> void :
 	DEBUG.warning("Process Mode is nt necessary for this capacity")
-#	if not enable : return
-#	if ! $Line2D.visible :
-#		$Line2D.visible = display
+
 
 func input(event):
 	if event is InputEventMouseButton :
-		if change_path_with_mouse && event.button_index == BUTTON_LEFT and event.pressed and debug :
+		if change_path_with_mouse && event.button_index == BUTTON_LEFT and event.pressed and is_debug() :
 			set_target(get_global_mouse_position())
-		if add_disable_point_with_mouse && event.button_index == BUTTON_RIGHT and event.pressed and debug :
+		if add_disable_point_with_mouse && event.button_index == BUTTON_RIGHT and event.pressed and is_debug() :
 			var __point = get_global_mouse_position()
 			switch_point(__point)
 
@@ -118,12 +117,12 @@ func get_finded_path() -> Array :
 	return _path
 
 
+func set_display(value : bool) -> void :
+	_exclude_texture = preload(TEXTURE_EXCLUDE)
+	$Line2D.visible = value
+	.set_display(value)
+
 ### Logic
-#func mark_point(world_point : Vector2) -> void :
-#	var __center_point = _levelmap.point_to_cell_center(world_point)
-#	var __index = _marked_points.find(__center_point)
-#	if __index == -1 :
-#		_marked_points.append(__center_point)
 
 
 func get_next_point(current_world_position : Vector2) -> Vector2 :
@@ -343,23 +342,23 @@ func get_cell_uid(cell : Vector2) -> int :
 
 ### EVENTS ###
 func _on_self_path_generated(new_path : Array) -> void :
-	if display :
+	if is_display() :
 		_line2D.points = new_path
-	if debug :
+	if is_debug() :
 		ONSCREEN.put(get_owner(), "Path size : ", _path.size())
 
 
 func _on_self_point_excluded(world_point) -> void :
-	if display :
+	if is_display() :
 		display_excluded_point(world_point, true)
-	if debug :
+	if is_debug() :
 		DEBUG.debug("Add exclude point [%s]" % world_point)
 		ONSCREEN.put(get_owner(),"Exclude points", _disabled_pic_points)
 
 
 func _on_self_point_included(world_point) -> void :
-	if display :
+	if is_display() :
 		display_excluded_point(world_point, false)
-	if debug :
+	if is_debug() :
 		DEBUG.debug("Remove exclude point [%s]" % world_point)
 		ONSCREEN.put(get_owner(),"Exclude points", _disabled_pic_points)

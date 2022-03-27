@@ -8,7 +8,11 @@ export(float) var init_max_speed : float = 146
 export(bool) var init_enable_diagonals : bool = false
 export(String, "Actors", "Heros", "Enemies") var group_name = CONSTANTS.GROUP_ACTORS
 export(bool) var is_bot : bool = false
-export(bool) var is_local :bool = true
+export(bool) var is_local : bool = true
+
+export (bool) var is_dying : bool = false
+export (bool) var is_dead : bool = false
+
 
 ### Variables
 var move_direction : Vector2 = init_direction setget set_direction, get_direction
@@ -24,7 +28,7 @@ onready var state_handler : StateHandlerCapacity = $StateHandlerCapacity
 signal position_changed(new_position)
 signal velocity_changed(new_velocity)
 signal direction_changed(new_direction)
-#signal state_changed(new_state)
+
 
 ### INIT  & EXIT ###
 func init_actor() -> void :

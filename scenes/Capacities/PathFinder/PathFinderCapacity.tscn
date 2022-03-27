@@ -5,7 +5,6 @@
 [node name="PathFinderCapacity" type="Node2D"]
 script = ExtResource( 1 )
 process_mode = 0
-debug = true
 change_path_with_mouse = false
 
 [node name="Line2D" type="Line2D" parent="."]

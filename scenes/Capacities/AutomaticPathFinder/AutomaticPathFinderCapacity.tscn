@@ -8,6 +8,20 @@ script = ExtResource( 1 )
 
 [node name="PathFinderSetDirection" parent="." instance=ExtResource( 2 )]
 owner_node = NodePath("..")
+process_mode = null
+_debug = null
+_display = null
+rotate_with_owner = null
+owner_method_direction = null
+owner_target_properties = null
+follow_target = null
+enable_diagonals = null
+add_disable_point_with_mouse = null
+change_path_with_mouse = null
+
+[node name="PathFinderCapacity" parent="PathFinderSetDirection" index="0"]
+_display = false
+add_disable_point_with_mouse = false
 
 [node name="Timer" type="Timer" parent="."]
 

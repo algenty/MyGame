@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/behavior_tree.svg-cf72efa202564d5cb8c24cfd2e7fa5fb.stex"
+path="res://.import/bt_call_simple_func_prop.svg-e91ef055259b710afff68307ca33fc5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://libraries/behavior_tree/behavior_tree.svg"
-dest_files=[ "res://.import/behavior_tree.svg-cf72efa202564d5cb8c24cfd2e7fa5fb.stex" ]
+source_file="res://libraries/behavior_tree/leaves/bt_call_simple_func_prop.svg"
+dest_files=[ "res://.import/bt_call_simple_func_prop.svg-e91ef055259b710afff68307ca33fc5e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

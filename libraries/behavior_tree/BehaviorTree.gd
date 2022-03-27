@@ -1,5 +1,5 @@
 #Behavior Tree.  Acts as root.  Only allows a single child node.
-class_name BehaviorTree, "res://libraries/behavior_tree/behavior_tree.svg"
+class_name BehaviorTree, "res://libraries/behavior_tree/BehaviorTree.svg"
 extends Node
 
 

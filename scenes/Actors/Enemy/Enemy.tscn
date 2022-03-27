@@ -30,9 +30,7 @@ owner_function = "move"
 debug = true
 
 [node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 3 )]
-
-[node name="AvailableEvent" parent="RandomSetDirectionCapacity" index="0"]
-debug = false
+_display = false
 
 [node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
 _enable = false

@@ -36,7 +36,7 @@ signal path_achieved(position)
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
 	### INIT CHILD
-	$PathFinderCapacity.set_enable(is_enable())
+#	$PathFinderCapacity.set_enable(is_enable())
 	$PathFinderCapacity.enable_diagonals = enable_diagonals
 	$Line2D.set_as_toplevel(true)
 	
@@ -94,7 +94,7 @@ func input(event):
 
 
 func set_enable(value : bool) -> void :
-	$Line2D.visible = value && display
+	$Line2D.visible = value && is_display()
 	.set_enable(value)
 
 
@@ -140,7 +140,7 @@ func clear_taken_points() -> void :
 
 ### EVENTS ###
 func _on_self_direction_changed(__direction) -> void :
-	if display :
+	if is_display()  :
 		add_taken_point(_owner_current_postion)
 	pass
 
@@ -148,5 +148,5 @@ func _on_self_target_changed(target) -> void :
 	pass
 
 func _on_self_taken_path_changed(path) -> void :
-	if display :
+	if is_display() :
 		_line2D.points = path

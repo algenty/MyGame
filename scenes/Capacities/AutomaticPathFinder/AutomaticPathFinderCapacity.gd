@@ -23,21 +23,18 @@ signal direction_changed(direction)
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
 	### INITS
-	var __agent = get_owner()
-	$Timer.wait_time = refresh_path_every_seconds
-	$Timer.start()
-	### CHECKS
-	if owner_method_direction != null && ! owner_method_direction.empty() :
-		if __agent.has_method(owner_method_direction) :
-			_owner_method_direction_available = true
-		else :
-			DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
-	
-	### Connects
-	var __ : int
-#	__ = $Timer.connect("timeout", self, "_on_timer_timeout")
-#	__ = $PathFinderSetDirection.connect("path_achieved", self, "_on_pathfinder_path_achieved")
 	.init()
+	if is_enable() :
+		$Timer.wait_time = refresh_path_every_seconds
+		$Timer.start()
+		var __agent = get_owner()
+
+		### CHECKS
+		if owner_method_direction != null && ! owner_method_direction.empty() :
+			if __agent.has_method(owner_method_direction) :
+				_owner_method_direction_available = true
+			else :
+				DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
 
 
 func free() -> void :

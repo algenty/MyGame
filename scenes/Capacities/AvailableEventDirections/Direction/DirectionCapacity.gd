@@ -90,8 +90,8 @@ func get_direction() -> Vector2 :
 
 
 func set_enable(value: bool) -> void :
-		$Label.visible = value && debug && display
-		$Sprite.visible = value && display
+		$Label.visible = value && is_debug() && is_display()
+		$Sprite.visible = value && is_display()
 		for __child in get_children() :
 			if __child is RayCast2D :
 				__child.enabled = value
@@ -119,7 +119,7 @@ func compute_default_direction() -> void :
 	var _rot_pos = $Direction.position.rotated(global_rotation)
 	_default_direction = Vector2(0.0, 0.0).direction_to(_rot_pos)
 	_rounded_direction = Vector2(_default_direction.round())
-	if debug :
+	if is_debug() :
 		$Label.set_text(name + "\n" + Utils.get_direction_name(_rounded_direction))
 	set_direction(_rounded_direction)
 
@@ -130,5 +130,5 @@ func _on_DirectionCapacty_capacity_changed(
 	available : bool = _available
 	) -> void :
 	var __ = direction
-	if display :
+	if is_display() :
 		$Sprite.visible = available

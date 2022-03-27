@@ -5,18 +5,25 @@ class_name Capacity
 export(NodePath) onready var owner_node = owner setget set_owner,get_owner
 
 # Enable / Disable capacity
-export var _enable : bool = true setget set_enable, is_enable
+export(bool) var _enable : bool = true setget set_enable, is_enable
 # Auto refresh state in physique process
 export(int, "Idle", "Process") var process_mode : bool = 1
 # debug mode
-export(bool) var debug : bool = false
+export(bool) var _debug : bool = false setget set_debug, is_debug
 # Display icons
-export(bool) var display : bool = true
+export(bool) var _display : bool = true  setget set_display, is_display
 # Rotate with Owner
 export(bool) var rotate_with_owner : bool = false 
 
+#var _enable : bool = true 
+#var _display : bool = false 
+#var _debug : bool = false 
+
+
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
+	set_display(_display)
+	set_debug(_debug)
 	set_enable(_enable)
 
 
@@ -44,7 +51,28 @@ func set_enable(value : bool) -> void :
 
 func is_enable() -> bool :
 	return _enable
-	
+
+func set_display(value : bool) -> void :
+	_display = value
+	for __child in get_children() :
+		if __child.has_method("set_display") :
+			__child.set_display(value)
+
+
+func is_display() -> bool :
+	return _display
+
+
+func set_debug(value : bool) -> void :
+	_debug = value
+	for __child in get_children() :
+		if __child.has_method("set_display") :
+			__child.set_debug(value)
+
+
+func is_debug()  -> bool :
+	return _debug
+
 
 ### BUIT-IT ###
 func _ready():

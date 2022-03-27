@@ -32,7 +32,7 @@ func init() -> void :
 	for key in keys :
 		_keys_state[key] = _RELEASED
 	### Init Sprites
-	if not display  or not is_enable() :
+	if not is_display()  or not is_enable() :
 		for _child in get_children() :
 			if _child is Sprite and "Key".is_subsequence_of(_child.name) :
 				_child.visible = false
@@ -93,13 +93,13 @@ func get_key_state(key) -> bool :
 
 ### EVENTS ###
 func _on_self_input_direction_changed(new_direction : Vector2) -> void :
-	if debug :
+	if is_debug() :
 		ONSCREEN.put(get_owner(),"Input direction", new_direction)
 
 func _on_self_input_key_state_changed(key, value) -> void :
-	if debug :
+	if is_debug() :
 		ONSCREEN.put(get_owner() ,"keys", _keys_state)
-	if not display : return
+	if not is_display() : return
 	else :
 		var _key_name = get_key_name(key)
 		var _sprite_name = "Key" + _key_name

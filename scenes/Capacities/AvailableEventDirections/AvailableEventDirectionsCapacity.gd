@@ -148,14 +148,13 @@ func get_random_direction(with_weight : bool = true) -> Vector2 :
 
 ### EVENTS ###
 func _on_self_available_directions_changed(available_dirs : Array) -> void :
-	if debug : ONSCREEN.put(get_owner(), "Available Dir.", available_dirs)
+	if is_debug() : 
+		ONSCREEN.put(get_owner(), "Available Dir.", available_dirs)
 
 
 func _on_owner_direction_changed(direction : Vector2) -> void :
 	if rotate_with_owner :
-#		print("Rotate")
 		rotation = direction.angle() - initial_direction.angle()
 		for __child in get_children() :
 			if __child is DirectionCapacty :
 				__child.compute_default_direction()
-#				print("Name : ", __child.name, " Dir. : ", str(__child.get_direction()))
