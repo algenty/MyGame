@@ -5,7 +5,6 @@
 
 [node name="AvailableEventDirectionsCapacity" type="Node2D"]
 script = ExtResource( 1 )
-_display = false
 rotate_with_owner = true
 
 [node name="Front" parent="." instance=ExtResource( 2 )]
@@ -16,10 +15,8 @@ rotation = 1.5708
 
 [node name="Left" parent="." instance=ExtResource( 2 )]
 rotation = 3.14159
-available_when_all_Raycast = true
 
 [node name="Right" parent="." instance=ExtResource( 2 )]
-available_when_all_Raycast = true
 
 [editable path="Front"]
 [editable path="Back"]

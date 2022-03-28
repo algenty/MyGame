@@ -10,7 +10,7 @@ font_data = ExtResource( 3 )
 
 [node name="Direction" type="Node2D"]
 script = ExtResource( 1 )
-available_when_all_Raycast = false
+_display = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 0, 2 )
@@ -42,3 +42,5 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
 text = "Name"
 align = 1
+
+[connection signal="capacity_changed" from="." to="." method="_on_Direction_capacity_changed"]

@@ -26,7 +26,9 @@ signal weight_changed(direction, weight)
 ### INIT  & EXIT ###
 func init() -> void :
 	$Label.text = name
-	var __ = connect("capacity_changed", self, "_on_DirectionCapacty_capacity_changed")
+	$Sprite.visible = is_enable() && is_display()
+	$Label.visible = is_enable() && is_debug() && is_display()
+#	var __ = connect("capacity_changed", self, "_on_DirectionCapacty_capacity_changed")
 	init_when_enable()
 	.init()
 
@@ -34,6 +36,7 @@ func init() -> void :
 func init_when_enable() -> void :
 	$Label.visible = is_enable() && is_debug() && is_display()
 	$Sprite.visible = is_enable() && is_display()
+	print("$Sprite.visible ", $Sprite.visible)
 	if is_enable() :
 		for __child in get_children() :
 			if __child is RayCast2D :
@@ -131,10 +134,16 @@ func compute_default_direction() -> void :
 
 
 ### EVENTS ###
-func _on_DirectionCapacty_capacity_changed(
-	direction : Vector2 = _direction, 
-	available : bool = _available
-	) -> void :
+#func _on_DirectionCapacty_capacity_changed(
+#	direction : Vector2 = _direction, 
+#	available : bool = _available
+#	) -> void :
+#	var __ = direction
+#	if is_display() :
+#		$Sprite.visible = available
+
+
+func _on_Direction_capacity_changed(direction : Vector2, available : bool) -> void :
 	var __ = direction
 	if is_display() :
 		$Sprite.visible = available

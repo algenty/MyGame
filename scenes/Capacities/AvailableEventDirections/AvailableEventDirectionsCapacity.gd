@@ -17,7 +17,7 @@ export(int) var init_raycast_size : int = 10
 
 ### INIT  & EXIT ###
 func init() -> void :
-	yield(get_parent(), "ready")
+#	yield(get_parent(), "ready")
 	### CHECKS
 	assert( connect("available_directions_changed", self, "_on_self_available_directions_changed") == 0)
 	for __child in get_children() :

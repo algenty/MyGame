@@ -22,6 +22,7 @@ export(bool) var rotate_with_owner : bool = false
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
+	yield(get_owner(), "ready")
 	set_display(_display)
 	set_debug(_debug)
 	set_enable(_enable)
