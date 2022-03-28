@@ -25,8 +25,9 @@ signal input_key_state_changed(key, value)
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
-	var __ = connect("input_key_state_changed", self, "_on_self_input_key_state_changed")
-	__ = connect("input_direction_changed", self, "_on_self_input_direction_changed")
+#	var __ : int = 0
+#	__ = connect("input_key_state_changed", self, "_on_self_input_key_state_changed")
+#	__ = connect("input_direction_changed", self, "_on_self_input_direction_changed")
 
 	### Init states
 	for key in keys :
@@ -95,7 +96,6 @@ func get_key_state(key) -> bool :
 func set_enable(value : bool) -> void :
 	init_when_enable()
 	.set_enable(value)
-	print(name," Enable ", _enable)
 
 
 ### BUIT-IT ###
@@ -104,12 +104,43 @@ func set_enable(value : bool) -> void :
 
 #IN MOTHER CLASS CAPACITY
 
+
+### LOCIC ###
+func get_key_name(key : String) -> String :
+	match(key) :
+		key_up : return "Up"
+		key_down : return "Down"
+		key_left : return "Left"
+		key_right : return "Right"
+	return ""
+
+
+func compute_direction() -> Vector2 :
+	var _new_direction : Vector2 = Vector2.ZERO
+	_new_direction.x = float(int(get_key_state(key_right)) - int(get_key_state(key_left)))
+	_new_direction.y = float(int(get_key_state(key_down)) - int(get_key_state(key_up)))
+	if (enable_diagonals) :
+		_new_direction = _new_direction.normalized()
+	else :
+		if _new_direction.x :
+			_new_direction.y = 0
+		else :
+			_new_direction.x = 0
+	return _new_direction
+
+
 ### EVENTS ###
-func _on_self_input_direction_changed(new_direction : Vector2) -> void :
+#func _on_self_input_direction_changed(new_direction : Vector2) -> void :
+#func _on_self_input_key_state_changed(key, value) -> void :
+
+
+
+func _on_InputEventDirectionCapacity_input_direction_changed(new_direction : Vector2):
 	if is_debug() :
 		ONSCREEN.put(get_owner(),"Input direction", new_direction)
 
-func _on_self_input_key_state_changed(key, value) -> void :
+
+func _on_InputEventDirectionCapacity_input_key_state_changed(key, value):
 	if is_debug() :
 		ONSCREEN.put(get_owner() ,"keys", _keys_state)
 	if not is_display() : return
@@ -125,26 +156,3 @@ func _on_self_input_key_state_changed(key, value) -> void :
 				_sprite.modulate = _COLOR_PRESSED
 			else : 
 				_sprite.modulate = _COLOR_RELEASED
-
-### LOCIC ###
-func get_key_name(key : String) -> String :
-	match(key) :
-		key_up : return "Up"
-		key_down : return "Down"
-		key_left : return "Left"
-		key_right : return "Right"
-	return ""
-
-func compute_direction() -> Vector2 :
-	var _new_direction : Vector2 = Vector2.ZERO
-	_new_direction.x = float(int(get_key_state(key_right)) - int(get_key_state(key_left)))
-	_new_direction.y = float(int(get_key_state(key_down)) - int(get_key_state(key_up)))
-	if (enable_diagonals) :
-		_new_direction = _new_direction.normalized()
-	else :
-		if _new_direction.x :
-			_new_direction.y = 0
-		else :
-			_new_direction.x = 0
-	return _new_direction
-	

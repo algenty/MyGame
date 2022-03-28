@@ -3,6 +3,7 @@ class_name Hero
 
 ### INIT/UPDATE/FREE ###
 func init_actor() -> void :
+	$InputSetDirectionCapacity.set_enable(true)
 	.init_actor()
 	pass
 	

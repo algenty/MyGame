@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_sequence.gd" type="Script" id=1]
+[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_selector.gd" type="Script" id=2]
+[ext_resource path="res://libraries/behavior_tree/BehaviorTree.gd" type="Script" id=3]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_call_simple_func_prop.gd" type="Script" id=4]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.gd" type="Script" id=5]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_set_blackboard_from_prop.gd" type="Script" id=6]
+
+[node name="BehaviorTree" type="Node"]
+script = ExtResource( 3 )
+agent = NodePath("..")
+blackboard = NodePath("../Blackboard")
+visibility_notifier = null
+
+[node name="Sequence" type="Node" parent="."]
+script = ExtResource( 1 )
+disabled = true
+
+[node name="Set_is_bot_to_BB" type="Node" parent="Sequence"]
+script = ExtResource( 6 )
+node = NodePath("../../..")
+node_property_or_function_name = "is_bot"
+blackboard_property_name = "is_bot"
+
+[node name="Bot_or_player" type="Node" parent="Sequence"]
+script = ExtResource( 2 )
+
+[node name="Bot" type="Node" parent="Sequence/Bot_or_player"]
+script = ExtResource( 1 )
+
+[node name="Is_Bot" type="Node" parent="Sequence/Bot_or_player/Bot"]
+script = ExtResource( 5 )
+blackboard_property_name = "is_bot"
+
+[node name="Enable_PathFinder" type="Node" parent="Sequence/Bot_or_player/Bot"]
+script = ExtResource( 4 )
+node = NodePath("../../../../../AutomaticPathFinderCapacity")
+node_function_name = "set_enable"
+blackboard_property_name = "is_bot"
+
+[node name="Disable_Input" type="Node" parent="Sequence/Bot_or_player/Bot"]
+script = ExtResource( 4 )
+node = NodePath("../../../../../InputSetDirectionCapacity")
+node_function_name = "set_enable"
+blackboard_property_name = "is_bot"
+invert_property_value = true
+
+[node name="Player" type="Node" parent="Sequence/Bot_or_player"]
+script = ExtResource( 1 )
+
+[node name="Disable_PathFinder" type="Node" parent="Sequence/Bot_or_player/Player"]
+script = ExtResource( 4 )
+node = NodePath("../../../../../AutomaticPathFinderCapacity")
+node_function_name = "set_enable"
+blackboard_property_name = "is_bot"
+invert_property_value = true
+
+[node name="Enable_Input" type="Node" parent="Sequence/Bot_or_player/Player"]
+script = ExtResource( 4 )
+node = NodePath("../../../../../InputSetDirectionCapacity")
+node_function_name = "set_enable"
+blackboard_property_name = "is_bot"

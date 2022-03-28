@@ -1,18 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Actors/Heros/Hero.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Actors/Heroes/Hero.png" type="Texture" id=3]
-[ext_resource path="res://scenes/Capacities/AutomaticPathFinder/AutomaticPathFinderCapacity.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Capacities/InputSetDirection/InputSetDirectionCapacity.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Capacities/StateHandler/State/State.tscn" type="PackedScene" id=6]
-[ext_resource path="res://libraries/behavior_tree/BehaviorTree.gd" type="Script" id=7]
 [ext_resource path="res://libraries/behavior_tree/blackboard.gd" type="Script" id=8]
-[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_sequence.gd" type="Script" id=9]
-[ext_resource path="res://libraries/behavior_tree/leaves/bt_set_blackboard_from_prop.gd" type="Script" id=10]
-[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_selector.gd" type="Script" id=11]
-[ext_resource path="res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.gd" type="Script" id=12]
-[ext_resource path="res://libraries/behavior_tree/leaves/bt_call_simple_func_prop.gd" type="Script" id=13]
 
 [node name="Hero" instance=ExtResource( 1 )]
 collision_layer = 32
@@ -25,14 +18,10 @@ group_name = "Heros"
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
 
-[node name="AutomaticPathFinderCapacity" parent="." index="3" instance=ExtResource( 4 )]
-_enable = false
-_debug = true
-
-[node name="InputSetDirectionCapacity" parent="." index="4" instance=ExtResource( 5 )]
+[node name="InputSetDirectionCapacity" parent="." index="3" instance=ExtResource( 5 )]
 _enable = false
 
-[node name="StateHandlerCapacity" parent="." index="5"]
+[node name="StateHandlerCapacity" parent="." index="4"]
 owner_node = NodePath("..")
 _display = false
 
@@ -47,60 +36,5 @@ owner_node = NodePath("../..")
 owner_function = "move"
 debug = true
 
-[node name="BehaviorTree" type="Node" parent="." index="6"]
-script = ExtResource( 7 )
-agent = NodePath("..")
-blackboard = NodePath("../Blackboard")
-visibility_notifier = null
-
-[node name="Sequence" type="Node" parent="BehaviorTree" index="0"]
-script = ExtResource( 9 )
-
-[node name="Set_is_bot_to_BB" type="Node" parent="BehaviorTree/Sequence" index="0"]
-script = ExtResource( 10 )
-node = NodePath("../../..")
-node_property_or_function_name = "is_bot"
-blackboard_property_name = "is_bot"
-
-[node name="Bot_or_player" type="Node" parent="BehaviorTree/Sequence" index="1"]
-script = ExtResource( 11 )
-
-[node name="Bot" type="Node" parent="BehaviorTree/Sequence/Bot_or_player" index="0"]
-script = ExtResource( 9 )
-
-[node name="Is_Bot" type="Node" parent="BehaviorTree/Sequence/Bot_or_player/Bot" index="0"]
-script = ExtResource( 12 )
-blackboard_property_name = "is_bot"
-
-[node name="Enable_PathFinder" type="Node" parent="BehaviorTree/Sequence/Bot_or_player/Bot" index="1"]
-script = ExtResource( 13 )
-node = NodePath("../../../../../AutomaticPathFinderCapacity")
-node_function_name = "set_enable"
-blackboard_property_name = "is_bot"
-
-[node name="Disable_Input" type="Node" parent="BehaviorTree/Sequence/Bot_or_player/Bot" index="2"]
-script = ExtResource( 13 )
-node = NodePath("../../../../../InputSetDirectionCapacity")
-node_function_name = "set_enable"
-blackboard_property_name = "is_bot"
-invert_property_value = true
-
-[node name="Player" type="Node" parent="BehaviorTree/Sequence/Bot_or_player" index="1"]
-script = ExtResource( 9 )
-disabled = true
-
-[node name="Disable_PathFinder" type="Node" parent="BehaviorTree/Sequence/Bot_or_player/Player" index="0"]
-script = ExtResource( 13 )
-node = NodePath("../../../../../AutomaticPathFinderCapacity")
-node_function_name = "set_enable"
-blackboard_property_name = "is_bot"
-invert_property_value = true
-
-[node name="Enable_Input" type="Node" parent="BehaviorTree/Sequence/Bot_or_player/Player" index="1"]
-script = ExtResource( 13 )
-node = NodePath("../../../../../InputSetDirectionCapacity")
-node_function_name = "set_enable"
-blackboard_property_name = "is_bot"
-
-[node name="Blackboard" type="Node" parent="." index="7"]
+[node name="Blackboard" type="Node" parent="." index="5"]
 script = ExtResource( 8 )

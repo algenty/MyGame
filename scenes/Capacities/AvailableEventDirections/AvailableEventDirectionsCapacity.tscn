@@ -5,7 +5,7 @@
 
 [node name="AvailableEventDirectionsCapacity" type="Node2D"]
 script = ExtResource( 1 )
-display = false
+_display = false
 rotate_with_owner = true
 
 [node name="Front" parent="." instance=ExtResource( 2 )]

@@ -13,4 +13,3 @@ _display = false
 process_mode = 1
 
 [node name="AvailableEvent" parent="." instance=ExtResource( 3 )]
-_display = false

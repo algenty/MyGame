@@ -66,10 +66,11 @@ func get_direction() -> Vector2 :
 	return _direction
 
 func set_enable(value : bool) -> void :
-	$InputEvent.set_enable(value)
-	$AvailableEvent.set_enable(value)
+	if value != _enable :
+		$InputEvent.set_enable(value)
+		$AvailableEvent.set_enable(value)
 	.set_enable(value)
-	print(name," Enable ", _enable)
+
 
 ### BUIT-IT ###
 #IN MOTHER CLASS CAPACITY

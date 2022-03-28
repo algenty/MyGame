@@ -26,3 +26,6 @@ texture = ExtResource( 2 )
 position = Vector2( 7, 15 )
 rotation = -1.5708
 texture = ExtResource( 2 )
+
+[connection signal="input_direction_changed" from="." to="." method="_on_InputEventDirectionCapacity_input_direction_changed"]
+[connection signal="input_key_state_changed" from="." to="." method="_on_InputEventDirectionCapacity_input_key_state_changed"]

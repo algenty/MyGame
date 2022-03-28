@@ -48,9 +48,19 @@ func set_enable(value : bool) -> void :
 	set_physics_process(value && process_mode)
 	set_process(value && process_mode)
 	set_process_input(value)
+	print(name," Enable ", _enable)
 
 func is_enable() -> bool :
 	return _enable
+
+
+func disable() -> void :
+	set_enable(false)
+
+
+func enable() -> void :
+	set_enable(true)
+
 
 func set_display(value : bool) -> void :
 	_display = value

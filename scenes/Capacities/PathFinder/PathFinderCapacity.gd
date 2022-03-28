@@ -42,28 +42,27 @@ signal point_included(world_point)
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
 	.init()
-	if is_enable() :
-		if tilemaps_group == null || tilemaps_group.empty() :
-			DEBUG.critical("No group defined for tilemap")
-		var __levelmaps : Array = get_tree().get_nodes_in_group(tilemaps_group)
-		if __levelmaps.empty() :
-			DEBUG.critical("No tilemap/levelmap in group [%s]" % tilemaps_group)
-			return
-		if __levelmaps.size() != 1 :
-			DEBUG.critical("Only 1 levelMap is supported")
-		_levelmap = __levelmaps[0]
-		# Inits childs
-		$Line2D.set_as_toplevel(true)
-		# Connects
-		var __ = connect("path_generated", self, "_on_self_path_generated")
-		__ = connect("point_excluded", self, "_on_self_point_excluded")
-		__ = connect("point_included", self, "_on_self_point_included")
-		# Astar
-		_astart_init()
-		
-		# origin is owner
-		var __agent = get_owner()
-		if __agent : set_origin(__agent.global_position)
+	if tilemaps_group == null || tilemaps_group.empty() :
+		DEBUG.critical("No group defined for tilemap")
+	var __levelmaps : Array = get_tree().get_nodes_in_group(tilemaps_group)
+	if __levelmaps.empty() :
+		DEBUG.critical("No tilemap/levelmap in group [%s]" % tilemaps_group)
+		return
+	if __levelmaps.size() != 1 :
+		DEBUG.critical("Only 1 levelMap is supported")
+	_levelmap = __levelmaps[0]
+	# Inits childs
+	$Line2D.set_as_toplevel(true)
+	# Connects
+	var __ = connect("path_generated", self, "_on_self_path_generated")
+	__ = connect("point_excluded", self, "_on_self_point_excluded")
+	__ = connect("point_included", self, "_on_self_point_included")
+	# Astar
+	_astart_init()
+	
+	# origin is owner
+	var __agent = get_owner()
+	if __agent : set_origin(__agent.global_position)
 
 
 func free() -> void :

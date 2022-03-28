@@ -24,9 +24,8 @@ signal direction_changed(direction)
 func init() -> void :
 	### INITS
 	.init()
-	if is_enable() :
-		$Timer.wait_time = refresh_path_every_seconds
-		$Timer.start()
+	$Timer.wait_time = refresh_path_every_seconds
+	$Timer.start()
 
 	### CHECKS
 	var __agent = get_owner()
@@ -53,7 +52,6 @@ func set_enable(value : bool) -> void :
 		$Timer.stop()
 	$PathFinderSetDirection.set_enable(value)
 	.set_enable(value)
-	print(name," Enable ", _enable)
 
 
 func set_target(value : Vector2, force : bool = false) -> void :

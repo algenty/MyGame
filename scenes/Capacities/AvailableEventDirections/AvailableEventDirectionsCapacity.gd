@@ -37,10 +37,13 @@ func init() -> void :
 			assert(_owner.connect("direction_changed", self, "_on_owner_direction_changed") == 0)
 		else :
 			DEBUG.error("No signal [direction_changed] for owner") 
-			
-	_random.randomize()
-	update()
+	init_when_enable()
 	.init()
+
+func init_when_enable() -> void :
+	if is_enable() :
+		_random.randomize()
+		update()
 
 func free() -> void :
 	_available_directions.clear()
@@ -119,9 +122,7 @@ func get_capacity(direction_or_name) -> DirectionCapacty :
 	return null
 
 func set_enable_direction(direction_or_name, __enable  = true) -> void :
-	var __child :  DirectionCapacty = get_capacity(direction_or_name)
-	if __child != null :
-		__child.set_enable(__enable)
+	init_when_enable()
 
 func get_random_direction(with_weight : bool = true) -> Vector2 :
 	if not process_mode : 
