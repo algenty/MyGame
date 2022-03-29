@@ -1,9 +1,13 @@
 extends Node2D
 class_name Capacity
 
-# Owner
-export(NodePath) onready var owner_node = owner setget set_owner,get_owner
+### CONSTANT
+const SIGNAL_DIRECTION_CHANGED = "direction_changed"
+const VARIABLE_INITIAL_DIRECTION = "init_direction"
 
+### Exports
+# Owner
+export(NodePath) onready var owner_node = owner setget set_owner_node,get_owner_node
 # Enable / Disable capacity
 export(bool) var _enable : bool = true setget set_enable, is_enable
 # Auto refresh state in physique process
@@ -13,20 +17,31 @@ export(bool) var _debug : bool = false setget set_debug, is_debug
 # Display icons
 export(bool) var _display : bool = true  setget set_display, is_display
 # Rotate with Owner
-export(bool) var rotate_with_owner : bool = false 
+export(bool) var rotate_with_direction_owner : bool = false
 
-#var _enable : bool = true 
-#var _display : bool = false 
-#var _debug : bool = false 
+### Variable
+var _init_direction : Vector2
 
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
-	yield(get_owner(), "ready")
+	yield(owner, "ready")
 	set_display(_display)
 	set_debug(_debug)
-	set_enable(_enable)
-
+	set_activate()
+	var __agent : = get_owner_node()
+	if __agent == null :
+		DEBUG.critical("Owner node must be assigned to the capacity")
+		return
+	if rotate_with_direction_owner :
+		if not __agent.has_signal(SIGNAL_DIRECTION_CHANGED) :
+			DEBUG.critical("Owner node [%s] have no signal [%s]" % [__agent, SIGNAL_DIRECTION_CHANGED])
+		if not VARIABLE_INITIAL_DIRECTION in __agent :
+			DEBUG.critical("Owner node [%s] have no variable [%s]" % [__agent, VARIABLE_INITIAL_DIRECTION])
+		_init_direction = __agent.get(VARIABLE_INITIAL_DIRECTION)
+		var error = __agent.connect(SIGNAL_DIRECTION_CHANGED, self, "rotate_capacity")
+		if error : 
+			DEBUG.critical("Unable to connect Signal [%s] with owner node [%s]" % [SIGNAL_DIRECTION_CHANGED, __agent])
 
 func free() -> void :
 	pass
@@ -38,30 +53,33 @@ func input(_event : InputEvent) -> void :
 	pass
 
 ### ACCESSORS ###
-func set_owner(new_owner : Node) -> void :
+func set_owner_node(new_owner : Node) -> void :
 	owner_node = new_owner
 
-func get_owner() -> Node :
+func get_owner_node() -> Node :
 	return owner_node
-	
+
+
 func set_enable(value : bool) -> void :
-	_enable = value
-	set_physics_process(value && process_mode)
-	set_process(value && process_mode)
-	set_process_input(value)
-	print(name," Enable ", _enable)
+	if _enable != value :
+		_enable = value
+		set_activate()
 
 func is_enable() -> bool :
 	return _enable
 
+func set_activate() -> void :
+	set_physics_process(is_enable() && process_mode)
+	set_process(is_enable() && process_mode)
+	set_process_input(is_enable())
+#	print(name," Activated ", is_enable())
 
-func disable() -> void :
-	set_enable(false)
-
-
-func enable() -> void :
-	set_enable(true)
-
+#func disable() -> void :
+#	set_enable(false)
+#
+#
+#func enable() -> void :
+#	set_enable(true)
 
 func set_display(value : bool) -> void :
 	_display = value
@@ -98,4 +116,13 @@ func _physics_process(delta):
 func _input(event):
 	input(event)
 
-### LOCIC ###
+### LOGIC ###
+func rotate_capacity(__direction : Vector2, __rounded : bool = true) -> void :
+	if __rounded :
+		__direction = __direction.round()
+	print("Global_rotation : ",global_rotation)
+	print("rotation : ", rotation)
+	print("Direction  : ", __direction)
+	print("Direction  Name : ", Utils.get_direction_name(__direction))
+	print("Direction rotation : ",__direction.angle())
+	set_global_rotation(__direction.angle() - Vector2.DOWN.angle())

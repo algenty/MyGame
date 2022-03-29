@@ -5,7 +5,5 @@
 
 [node name="RandomSetDirectionCapacity" type="Node2D"]
 script = ExtResource( 1 )
-debug = true
 
 [node name="AvailableEvent" parent="." instance=ExtResource( 3 )]
-debug = true

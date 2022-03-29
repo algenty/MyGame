@@ -2,7 +2,7 @@ extends Node
 class_name State
 
 ### Constants
-export(NodePath) var owner_node setget set_owner, get_owner
+export(NodePath) var owner_node setget ,get_owner_node
 export(String) onready var owner_function : String = self.name.to_lower()
 export(bool) var ignore_return_code = false
 export(bool) var debug : bool = false
@@ -50,7 +50,7 @@ func finish() -> void :
 	emit_signal("state_finished", self)
 	
 func update(delta:float) -> void :
-	var result_call = owner_node.call(owner_function, delta)
+	var result_call = get_owner_node().call(owner_function, delta)
 	if  ! ignore_return_code :
 		if result_call : 
 			_result = RESULT.SUCCESS
@@ -75,11 +75,11 @@ func get_result() -> int :
 	return _result
 
 
-func set_owner(new_owner) -> void :
-	owner_node = new_owner
+#func set_owner_node(new_owner) -> void :
+#	owner_node = new_owner
 
 
-func get_owner() -> Node :
-	return owner_node 
+func get_owner_node() -> Node :
+	return get_node(owner_node) 
 
 

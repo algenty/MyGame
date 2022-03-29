@@ -119,10 +119,10 @@ func _on_State_state_finished(old_state : State) -> void :
 	if old_state != null :
 		finish_state(old_state)
 		if is_debug() :
-			ONSCREEN.put(get_owner(),"state status", old_state.get_result())
+			ONSCREEN.put(get_owner_node(),"state status", old_state.get_result())
 			DEBUG.debug("State [%s] is finish with code [%s]" % [old_state.name, old_state.get_result()] )
 
 func _on_self_state_changed(new_state : State) -> void :
 	if new_state != null && is_debug() :
-		ONSCREEN.put(get_owner(),"State", new_state.get_name())
+		ONSCREEN.put(get_owner_node(),"State", new_state.get_name())
 		DEBUG.debug("Curent state is [%s]" % new_state.get_name() )

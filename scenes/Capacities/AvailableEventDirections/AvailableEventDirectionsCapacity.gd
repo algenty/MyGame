@@ -10,37 +10,36 @@ var _available_childs : Array = []
 var _available_weights : Array = []
 var _random = RandomNumberGenerator.new()
 var _random_weighted = RandomWeighted.new()
-var initial_direction : Vector2 = Vector2.DOWN
+#var initial_direction : Vector2 = Vector2.DOWN
 
 ### EXPORTS
 export(int) var init_raycast_size : int = 10
 
 ### INIT  & EXIT ###
 func init() -> void :
-#	yield(get_parent(), "ready")
 	### CHECKS
-	assert( connect("available_directions_changed", self, "_on_self_available_directions_changed") == 0)
+	.init()
+	var __ = connect("available_directions_changed", self, "_on_self_available_directions_changed")
 	for __child in get_children() :
 		if ! __child is DirectionCapacty :
 			DEBUG.critical("[%s] is not a DirectionCapacty in [%s]" % [__child.name, name])
 		elif __child is DirectionCapacty :
 			__child.set_size(init_raycast_size)
-	var _owner : Object = get_owner()
-	if rotate_with_owner :
-		# Init direction angle
-		if _owner.has_method("get_direction") :
-			initial_direction = _owner.get_direction()
-		else :
-			DEBUG.critical("Owner [%s] has not method get_direction to calculate rotation with initial direction")
-		# Connect signal direction changed	
-		if _owner.has_signal("direction_changed") :
-			assert(_owner.connect("direction_changed", self, "_on_owner_direction_changed") == 0)
-		else :
-			DEBUG.error("No signal [direction_changed] for owner") 
-	init_when_enable()
-	.init()
+#	var _owner : Object = get_owner_node()
+#	if rotate_with_owner :
+#		# Init direction angle
+#		if _owner.has_method("get_direction") :
+#			initial_direction = _owner.get_direction()
+#		else :
+#			DEBUG.critical("Owner [%s] has not method get_direction to calculate rotation with initial direction")
+#		# Connect signal direction changed	
+#		if _owner.has_signal("direction_changed") :
+#			assert(_owner.connect("direction_changed", self, "_on_owner_direction_changed") == 0)
+#		else :
+#			DEBUG.error("No signal [direction_changed] for owner") 
 
-func init_when_enable() -> void :
+func set_activate() -> void :
+	.set_activate()
 	if is_enable() :
 		_random.randomize()
 		update()
@@ -112,17 +111,17 @@ func _remove_direction(child : DirectionCapacty) -> bool :
 	return false
 
 
-func get_capacity(direction_or_name) -> DirectionCapacty :
-	for __child in get_children() :
-		if __child is DirectionCapacty : 
-			if direction_or_name is String && __child.get_name() == direction_or_name :
-				return __child
-			elif direction_or_name is Vector2 && __child.get_direction() == direction_or_name :
-				return __child
-	return null
+#func get_capacity(direction_or_name) -> DirectionCapacty :
+#	for __child in get_children() :
+#		if __child is DirectionCapacty : 
+#			if direction_or_name is String && __child.get_name() == direction_or_name :
+#				return __child
+#			elif direction_or_name is Vector2 && __child.get_direction() == direction_or_name :
+#				return __child
+#	return null
 
-func set_enable_direction(direction_or_name, __enable  = true) -> void :
-	init_when_enable()
+#func set_enable_direction(direction_or_name, __enable  = true) -> void :
+#	init_when_enable()
 
 func get_random_direction(with_weight : bool = true) -> Vector2 :
 	if not process_mode : 
@@ -150,12 +149,12 @@ func get_random_direction(with_weight : bool = true) -> Vector2 :
 ### EVENTS ###
 func _on_self_available_directions_changed(available_dirs : Array) -> void :
 	if is_debug() : 
-		ONSCREEN.put(get_owner(), "Available Dir.", available_dirs)
+		ONSCREEN.put(get_owner_node(), "Available Dir.", available_dirs)
 
 
-func _on_owner_direction_changed(direction : Vector2) -> void :
-	if rotate_with_owner :
-		rotation = direction.angle() - initial_direction.angle()
-		for __child in get_children() :
-			if __child is DirectionCapacty :
-				__child.compute_default_direction()
+#func _on_owner_direction_changed(direction : Vector2) -> void :
+#	if rotate_with_owner :
+#		rotation = initial_direction.angle()  - direction.angle()
+#		for __child in get_children() :
+#			if __child is DirectionCapacty :
+#				__child.compute_default_direction()

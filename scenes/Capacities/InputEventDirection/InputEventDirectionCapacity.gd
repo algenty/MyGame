@@ -137,12 +137,12 @@ func compute_direction() -> Vector2 :
 
 func _on_InputEventDirectionCapacity_input_direction_changed(new_direction : Vector2):
 	if is_debug() :
-		ONSCREEN.put(get_owner(),"Input direction", new_direction)
+		ONSCREEN.put(get_owner_node(),"Input direction", new_direction)
 
 
 func _on_InputEventDirectionCapacity_input_key_state_changed(key, value):
 	if is_debug() :
-		ONSCREEN.put(get_owner() ,"keys", _keys_state)
+		ONSCREEN.put(get_owner_node() ,"keys", _keys_state)
 	if not is_display() : return
 	else :
 		var _key_name = get_key_name(key)

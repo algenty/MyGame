@@ -24,13 +24,14 @@ signal direction_changed(direction)
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
+	.init()
 	### INIT CHILD
 	_input_event = $InputEvent
 	_available_event = $AvailableEvent
 
-	var __agent = get_owner()
-	_input_event.set_owner(__agent)
-	_available_event.set_owner(__agent)
+	var __agent = get_owner_node()
+	_input_event.set_owner_node(__agent)
+	_available_event.set_owner_node(__agent)
 
 	if owner_method_direction != null && ! owner_method_direction.empty() :
 		if __agent.has_method(owner_method_direction) :
@@ -42,7 +43,6 @@ func init() -> void :
 	### SIGNALS
 	var __ = _input_event.connect("input_direction_changed", self, "_on_input_event_input_direction_changed")
 	__ = _available_event.connect("available_directions_changed", self, "_on_available_event_available_directions_changed")
-	.init()
 
 
 func free() -> void :
@@ -57,7 +57,7 @@ func update(_delta : float = 0.0) -> void :
 func set_direction(value : Vector2) -> void :
 	if value != _direction :
 		_direction = value
-		var __agent = get_owner()
+		var __agent = get_owner_node()
 		if _owner_method_direction_available :
 			__agent.call(owner_method_direction, value)
 		emit_signal("direction_changed", value)
@@ -65,11 +65,10 @@ func set_direction(value : Vector2) -> void :
 func get_direction() -> Vector2 :
 	return _direction
 
-func set_enable(value : bool) -> void :
-	if value != _enable :
-		$InputEvent.set_enable(value)
-		$AvailableEvent.set_enable(value)
-	.set_enable(value)
+func set_activate() -> void :
+	.set_activate()
+	$InputEvent.set_enable(is_enable())
+	$AvailableEvent.set_enable(is_enable())
 
 
 ### BUIT-IT ###

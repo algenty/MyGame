@@ -26,11 +26,11 @@ signal direction_changed(direction)
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
+	.init()
+	
 	### INIT CHILD
-	$AvailableEvent.set_enable(is_enable())
-
-	var __agent = get_owner()
-	$AvailableEvent.set_owner(__agent)
+	var __agent = get_owner_node()
+	$AvailableEvent.set_owner_node(__agent)
 
 	### CHECKS
 	if owner_method_direction != null && ! owner_method_direction.empty() :
@@ -43,8 +43,6 @@ func init() -> void :
 	### SIGNALS
 	var __ = $AvailableEvent.connect("available_directions_changed", self, "_on_available_event_available_directions_changed")
 	__ = self.connect("direction_changed", self, "_on_self_direction_changed")
-	_random.randomize()
-	.init()
 
 func free() -> void :
 	.free()
@@ -55,10 +53,15 @@ func update(_delta : float = get_physics_process_delta_time()) -> void :
 
 
 ### ACCESSORS ###
+func set_activate() -> void :
+	if is_enable() :
+		_random.randomize()
+	$AvailableEvent.set_enable(is_enable())
+
 func set_direction(value : Vector2) -> void :
 	if value != _direction :
 		_direction = value
-		var __agent = get_owner()
+		var __agent = get_owner_node()
 		if _owner_method_direction_available :
 			__agent.call(owner_method_direction, value)
 		emit_signal("direction_changed", value)
@@ -68,19 +71,13 @@ func get_direction() -> Vector2 :
 	return _direction
 
 
-#func random_direction(array_directions : Array = _available_directions) -> void :
-#	var __size = array_directions.size()
-#	if array_directions.size() :
-#		var __index = _random.randi() % (__size)
-#		set_direction(array_directions[__index])
-
 ### BUIT-IT ###
 #IN MOTHER CLASS CAPACITY
 
 ### EVENTS ###
 func _on_available_event_available_directions_changed(new_directions_array : Array) -> void :
 	_available_directions = new_directions_array
-	var __new_position : Vector2 = get_owner().global_position
+	var __new_position : Vector2 = get_owner_node().global_position
 	var __distance = __new_position.distance_to(_old_position)
 	if get_direction() == Vector2.ZERO || __distance  >= owner_min_distance_before_change || _old_position == __new_position :
 		var new_direction : Vector2 = $AvailableEvent.get_random_direction(ramdon_with_weight)

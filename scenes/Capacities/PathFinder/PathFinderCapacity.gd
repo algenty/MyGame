@@ -61,7 +61,7 @@ func init() -> void :
 	_astart_init()
 	
 	# origin is owner
-	var __agent = get_owner()
+	var __agent = get_owner_node()
 	if __agent : set_origin(__agent.global_position)
 
 
@@ -89,7 +89,6 @@ func process_path() -> void :
 		_on_target = false
 		emit_signal("path_generated", _path)
 
-
 func set_target(value : Vector2, force = false) -> void :
 	var _new_target := value
 	if _new_target != _global_target || force:
@@ -105,7 +104,7 @@ func set_origin(value : Vector2) -> void :
 	var _new_orgin := value
 	if _new_orgin!= _global_origin :
 		_global_origin = _new_orgin
-		process_path()
+#		process_path()
 
 
 func get_origin() -> Vector2 :
@@ -116,10 +115,11 @@ func get_finded_path() -> Array :
 	return _path
 
 
-func set_display(value : bool) -> void :
-	_exclude_texture = preload(TEXTURE_EXCLUDE)
-	$Line2D.visible = value
-	.set_display(value)
+func set_activate() -> void :
+	.set_activate()
+	if is_enable() && is_display() :
+		_exclude_texture = preload(TEXTURE_EXCLUDE)
+	$Line2D.visible = is_enable() && is_display()
 
 ### Logic
 
@@ -344,7 +344,7 @@ func _on_self_path_generated(new_path : Array) -> void :
 	if is_display() :
 		_line2D.points = new_path
 	if is_debug() :
-		ONSCREEN.put(get_owner(), "Path size : ", _path.size())
+		ONSCREEN.put(get_owner_node(), "Path size : ", _path.size())
 
 
 func _on_self_point_excluded(world_point) -> void :
@@ -352,7 +352,7 @@ func _on_self_point_excluded(world_point) -> void :
 		display_excluded_point(world_point, true)
 	if is_debug() :
 		DEBUG.debug("Add exclude point [%s]" % world_point)
-		ONSCREEN.put(get_owner(),"Exclude points", _disabled_pic_points)
+		ONSCREEN.put(get_owner_node(),"Exclude points", _disabled_pic_points)
 
 
 func _on_self_point_included(world_point) -> void :
@@ -360,4 +360,4 @@ func _on_self_point_included(world_point) -> void :
 		display_excluded_point(world_point, false)
 	if is_debug() :
 		DEBUG.debug("Remove exclude point [%s]" % world_point)
-		ONSCREEN.put(get_owner(),"Exclude points", _disabled_pic_points)
+		ONSCREEN.put(get_owner_node(),"Exclude points", _disabled_pic_points)

@@ -32,3 +32,6 @@ func idle(delta :float = get_process_delta_time()) -> bool :
 	else :
 		set_direction( Vector2(-1,0))
 	return true
+
+#func move(_delta :float = get_process_delta_time(), velocity := move_velocity) -> bool :
+#	return true

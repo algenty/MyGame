@@ -25,17 +25,21 @@ signal direction_changed(direction)
 func init() -> void :
 	### INITS
 	.init()
-	init_when_enable()
+	# Set_activate in mother
 	### CHECKS
-	var __agent = get_owner()
+	var __agent = get_owner_node()
 	if owner_method_direction != null && ! owner_method_direction.empty() :
 		if __agent.has_method(owner_method_direction) :
 			_owner_method_direction_available = true
 		else :
 			DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
 
-func init_when_enable() -> void :
+
+func set_activate() -> void :
+	.set_activate()
 	if is_enable() :
+		refresh_obstables()
+		refresh_target()
 		if _timer == null :
 			_timer = Timer.new()
 			_timer.set_timer_process_mode(Timer.TIMER_PROCESS_PHYSICS) 
@@ -61,9 +65,8 @@ func update(delta : float = get_physics_process_delta_time()) -> void :
 
 
 ### ACCESSORS ###
-func set_enable(value : bool) -> void :
-	init_when_enable()
-	.set_enable(value)
+#func set_enable(value : bool) -> void :
+#	.set_enable(value)
 
 
 func set_target(value : Vector2, force : bool = false) -> void :
@@ -76,7 +79,7 @@ func set_target(value : Vector2, force : bool = false) -> void :
 func set_direction(value : Vector2) -> void :
 	if value != _direction :
 		_direction = value
-		var __agent = get_owner()
+		var __agent = get_owner_node()
 		if _owner_method_direction_available :
 			__agent.call(owner_method_direction, value)
 		emit_signal("direction_changed", value)

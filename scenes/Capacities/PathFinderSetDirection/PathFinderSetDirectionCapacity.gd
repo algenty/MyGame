@@ -22,8 +22,8 @@ var _owner_method_direction_available : bool = false
 var _owner_propertie_target_available : bool = false
 var _owner_current_postion : Vector2 = Vector2.ZERO
 var _taken_path : Array = []
-onready var _line2D = $Line2D
 
+onready var _line2D = $Line2D
 onready var _pathfinder : PathFinderCapacity = $PathFinderCapacity
 
 
@@ -35,12 +35,11 @@ signal path_achieved(position)
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
+	.init()
 	### INIT CHILD
-#	$PathFinderCapacity.set_enable(is_enable())
+	var __agent = get_owner_node()
 	$PathFinderCapacity.enable_diagonals = enable_diagonals
 	$Line2D.set_as_toplevel(true)
-	
-	var __agent = get_owner()
 	$PathFinderCapacity.set_owner(__agent)
 
 	### CHECKS
@@ -62,8 +61,6 @@ func init() -> void :
 	__ = self.connect("direction_changed", self, "_on_self_direction_changed")
 	__ = self.connect("target_changed", self, "_on_self_target_changed")
 	__ = self.connect("taken_path_changed", self, "_on_self_taken_path_changed")
-	.init()
-
 
 func free() -> void :
 	.free()
@@ -71,17 +68,14 @@ func free() -> void :
 
 func update(_delta : float = 0.0) -> void :
 	if _pathfinder.has_path() :
-		_owner_current_postion = get_owner().global_position
+		_owner_current_postion = get_owner_node().global_position
 		var __targeted : bool = _pathfinder.is_on_target(_owner_current_postion)
 		if not __targeted :
 			var __direction : Vector2 = _pathfinder.get_direction(_owner_current_postion)
 			set_direction(__direction)
-#			__targeted = _pathfinder.is_on_target(_owner_current_postion)
 		else :
 			emit_signal("path_achieved", _owner_current_postion)
-#			set_physics_process(false)
 	else : 
-#		set_physics_process(false)
 		pass
 
 
@@ -93,44 +87,50 @@ func input(event):
 				set_target(__target)
 
 
-func set_enable(value : bool) -> void :
-	$Line2D.visible = value && is_display()
-	.set_enable(value)
+func set_activate() -> void :
+	.set_activate()
+	$Line2D.visible = is_enable() && is_display()
 
 
 ### ACCESSORS ###
 func set_direction(value : Vector2) -> void :
 	if value != _direction :
 		_direction = value
-		var __agent = get_owner()
+		var __agent = get_owner_node()
 		if _owner_method_direction_available :
 			__agent.call(owner_method_direction, value)
 		emit_signal("direction_changed", value)
 
+
 func get_direction() -> Vector2 :
 	return _direction
+
 
 func set_target(value : Vector2, force : bool = false) -> void :
 	if value != _target || force:
 		_target = value
-		_pathfinder.set_origin(get_owner().global_position)
+		_pathfinder.set_origin(get_owner_node().global_position)
 		_pathfinder.set_target(_target)
 #		_pathfinder.get_finded_path()
 		set_physics_process(true)
 		clear_taken_points()
 		emit_signal("target_changed", value)
 
+
 func get_target() -> Vector2 :
 	return _target
+
 
 func add_taken_point(world_point : Vector2) -> void :
 	if not _taken_path.has(world_point) :
 		_taken_path.append(world_point)
 		emit_signal("taken_path_changed", _taken_path)
-		
+
+
 func clear_taken_points() -> void :
 	_taken_path = []
 	emit_signal("taken_path_changed", _taken_path)
+
 
 ### BUIT-IT ###
 #IN MOTHER CLASS CAPACITY
@@ -144,8 +144,10 @@ func _on_self_direction_changed(__direction) -> void :
 		add_taken_point(_owner_current_postion)
 	pass
 
+
 func _on_self_target_changed(target) -> void :
 	pass
+
 
 func _on_self_taken_path_changed(path) -> void :
 	if is_display() :

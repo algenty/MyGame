@@ -3,10 +3,10 @@ class_name Hero
 
 ### INIT/UPDATE/FREE ###
 func init_actor() -> void :
-	if is_bot :
-		$AutomaticPathFinderCapacity.set_enable(true)
-	else :
-		$InputSetDirectionCapacity.set_enable(true)
+#	if is_bot :
+#		$AutomaticPathFinderCapacity.set_enable(true)
+#	else :
+#		$InputSetDirectionCapacity.set_enable(true)
 	.init_actor()
 	pass
 	

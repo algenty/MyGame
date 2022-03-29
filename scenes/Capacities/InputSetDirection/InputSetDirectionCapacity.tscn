@@ -11,5 +11,10 @@ _display = false
 
 [node name="InputEvent" parent="." instance=ExtResource( 2 )]
 process_mode = 1
+_debug = true
+_display = true
 
 [node name="AvailableEvent" parent="." instance=ExtResource( 3 )]
+_debug = true
+_display = true
+rotate_with_direction_owner = true

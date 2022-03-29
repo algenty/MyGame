@@ -30,10 +30,13 @@ owner_function = "move"
 debug = true
 
 [node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 3 )]
-_display = false
+owner_node = NodePath("..")
+_debug = true
 
-[node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
-_enable = false
+[node name="AvailableEvent" parent="RandomSetDirectionCapacity" index="0"]
+owner_node = NodePath("../..")
+_debug = true
+_display = true
 
 [editable path="RandomSetDirectionCapacity"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent"]
