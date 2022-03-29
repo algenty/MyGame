@@ -8,6 +8,7 @@ var _direction : Vector2 setget set_direction, get_direction
 #var _default_direction : Vector2
 var _size : int setget set_size, get_size
 var _default_direction : Vector2 = Vector2.LEFT
+var _initial_direction : Vector2 = _default_direction
 
 ### CONSTANTS ###
 #const INITIAL_DIRECTION := Vector2.LEFT
@@ -27,8 +28,10 @@ signal weight_changed(direction, weight)
 ### INIT  & EXIT ###
 func init() -> void :
 	.init()
-	$Label.text = name
-	compute_default_direction()
+#	$Label.text = name
+	set_direction(compute_initial_direction())
+#	var __ : int 
+#	__ = connect("capacity_changed", self, "_on_Direction_direction_changed")
 	print("Name : ", name, " Vector : ", _direction, " global_rotate ", global_rotation_degrees)
 	
 
@@ -39,6 +42,11 @@ func set_activate() -> void :
 	for __child in get_children() :
 		if __child is RayCast2D :
 			__child.enabled = is_enable()
+	.set_activate()
+
+
+func on_capacity_rotation_changed() -> void :
+	set_direction(compute_global_direction())
 
 
 func free() -> void :
@@ -98,18 +106,16 @@ func get_direction() -> Vector2 :
 	if not process_mode : update()
 	return _direction
 
+
 func set_size(value : int) -> void :
 	for __child in get_children() :
 		if __child is RayCast2D :
 			__child.cast_to.x = value * -1
 	_size = value
 
+
 func get_size() -> int :
 	return _size
-
-func rotate_capacity(__direction : Vector2, __rounded : bool = true) -> void :
-	.rotate_capacity(__direction, __rounded)
-	$Label.set_text(name + "\n" + str(round(global_rotation)))
 
 ### LOGIC ###
 # Calculate direction according poistion "Direction"
@@ -127,14 +133,22 @@ func rotate_capacity(__direction : Vector2, __rounded : bool = true) -> void :
 #		$Label.set_text(name + "\n" + Utils.get_direction_name(_rounded_direction))
 #	set_direction(_rounded_direction)
 
-func compute_default_direction() -> void :
+func compute_initial_direction() -> Vector2 :
 	var __direction = _default_direction.rotated(global_rotation)
-	set_direction(__direction.round())
+	return __direction.round()
 
+
+func compute_global_direction() -> Vector2 :
+	var __direction = _default_direction.rotated(global_rotation)
+	return __direction.round()
 
 
 ### EVENTS ###
 func _on_Direction_capacity_changed(direction : Vector2, available : bool) -> void :
-	var __ = direction
 	if is_display() :
 		$Sprite.visible = available
+
+
+func _on_Direction_direction_changed(new_direction :Vector2) -> void : 
+	if is_display() && is_debug() :
+		$Label.set_text(name + "\n" + Utils.get_direction_name(get_direction()))

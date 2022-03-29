@@ -44,3 +44,4 @@ text = "Name"
 align = 1
 
 [connection signal="capacity_changed" from="." to="." method="_on_Direction_capacity_changed"]
+[connection signal="direction_changed" from="." to="." method="_on_Direction_direction_changed"]

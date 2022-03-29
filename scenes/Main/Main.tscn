@@ -25,7 +25,6 @@ __meta__ = {
 }
 
 [node name="Hero" parent="HeroPosition" instance=ExtResource( 1 )]
-is_bot = false
 
 [node name="Position1" type="Position2D" parent="."]
 position = Vector2( 24, 24 )

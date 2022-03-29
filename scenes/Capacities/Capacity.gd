@@ -72,14 +72,9 @@ func set_activate() -> void :
 	set_physics_process(is_enable() && process_mode)
 	set_process(is_enable() && process_mode)
 	set_process_input(is_enable())
-#	print(name," Activated ", is_enable())
 
-#func disable() -> void :
-#	set_enable(false)
-#
-#
-#func enable() -> void :
-#	set_enable(true)
+func on_capacity_rotation_changed() -> void :
+	pass
 
 func set_display(value : bool) -> void :
 	_display = value
@@ -117,12 +112,14 @@ func _input(event):
 	input(event)
 
 ### LOGIC ###
-func rotate_capacity(__direction : Vector2, __rounded : bool = true) -> void :
-	if __rounded :
-		__direction = __direction.round()
-	print("Global_rotation : ",global_rotation)
-	print("rotation : ", rotation)
-	print("Direction  : ", __direction)
-	print("Direction  Name : ", Utils.get_direction_name(__direction))
-	print("Direction rotation : ",__direction.angle())
-	set_global_rotation(__direction.angle() - Vector2.DOWN.angle())
+func rotate_capacity(rotation_direction : Vector2, rounded : bool = true) -> void :
+	if rounded :
+		rotation_direction = rotation_direction.round()
+#	print("Global_rotation : ",global_rotation)
+#	print("rotation : ", rotation)
+#	print("Direction  : ", rotation_direction)
+#	print("Direction  Name : ", Utils.get_direction_name(rotation_direction))
+#	print("Direction rotation : ",rotation_direction.angle())
+	set_rotation(rotation_direction.angle() - Vector2.DOWN.angle())
+	on_capacity_rotation_changed()
+

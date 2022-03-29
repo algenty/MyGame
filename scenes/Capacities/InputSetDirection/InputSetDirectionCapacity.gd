@@ -9,8 +9,8 @@ export(String) var owner_method_direction : String = "set_direction"
 ### Constants
 
 ### Variables
-onready var _input_event : InputEventDirectionCapacity
-onready var _available_event  : AvailableEventDirectionsCapacity
+var _input_event : InputEventDirectionCapacity
+var _available_event  : AvailableEventDirectionsCapacity
 
 ### Properties
 var _direction : Vector2 = Vector2.ZERO setget set_direction, get_direction
