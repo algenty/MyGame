@@ -42,6 +42,3 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
 text = "Name"
 align = 1
-
-[connection signal="capacity_changed" from="." to="." method="_on_Direction_capacity_changed"]
-[connection signal="direction_changed" from="." to="." method="_on_Direction_direction_changed"]

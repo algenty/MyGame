@@ -22,6 +22,9 @@ export(bool) var rotate_with_direction_owner : bool = false
 ### Variable
 var _init_direction : Vector2
 
+### Signals
+#signal capacity_rotated(new_direction)
+
 
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
@@ -39,9 +42,14 @@ func init() -> void :
 		if not VARIABLE_INITIAL_DIRECTION in __agent :
 			DEBUG.critical("Owner node [%s] have no variable [%s]" % [__agent, VARIABLE_INITIAL_DIRECTION])
 		_init_direction = __agent.get(VARIABLE_INITIAL_DIRECTION)
-		var error = __agent.connect(SIGNAL_DIRECTION_CHANGED, self, "rotate_capacity")
+		var error : int 
+		error = __agent.connect(SIGNAL_DIRECTION_CHANGED, self, "rotate_capacity")
+#		error = connect("capacity_rotated", self, "on_capacity_rotation_changed")
 		if error : 
 			DEBUG.critical("Unable to connect Signal [%s] with owner node [%s]" % [SIGNAL_DIRECTION_CHANGED, __agent])
+		pass
+
+
 
 func free() -> void :
 	pass
@@ -68,12 +76,12 @@ func set_enable(value : bool) -> void :
 func is_enable() -> bool :
 	return _enable
 
-func on_capacity_enable_changed(value : bool = is_enable()) -> void :
-	set_physics_process(is_enable() && process_mode)
-	set_process(is_enable() && process_mode)
-	set_process_input(is_enable())
+func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
+	set_physics_process(enabled && process_mode)
+	set_process(enabled && process_mode)
+	set_process_input(enabled)
 
-func on_capacity_rotation_changed() -> void :
+func on_capacity_rotation_changed(new_direction : Vector2) -> void :
 	pass
 
 func set_display(value : bool) -> void :
@@ -115,11 +123,7 @@ func _input(event):
 func rotate_capacity(rotation_direction : Vector2, rounded : bool = true) -> void :
 	if rounded :
 		rotation_direction = rotation_direction.round()
-#	print("Global_rotation : ",global_rotation)
-#	print("rotation : ", rotation)
-#	print("Direction  : ", rotation_direction)
-#	print("Direction  Name : ", Utils.get_direction_name(rotation_direction))
-#	print("Direction rotation : ",rotation_direction.angle())
 	set_rotation(rotation_direction.angle() - Vector2.DOWN.angle())
-	on_capacity_rotation_changed()
+#	emit_signal("capacity_rotated")
+	on_capacity_rotation_changed(rotation_direction)
 

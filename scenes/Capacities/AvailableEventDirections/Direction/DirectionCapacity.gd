@@ -8,7 +8,7 @@ var _direction : Vector2 setget set_direction, get_direction
 #var _default_direction : Vector2
 var _size : int setget set_size, get_size
 var _default_direction : Vector2 = Vector2.LEFT
-var _initial_direction : Vector2 = _default_direction
+#var _initial_direction : Vector2 = _default_direction
 
 ### CONSTANTS ###
 #const INITIAL_DIRECTION := Vector2.LEFT
@@ -29,24 +29,25 @@ signal weight_changed(direction, weight)
 func init() -> void :
 	.init()
 #	$Label.text = name
-	set_direction(compute_initial_direction())
-#	var __ : int 
-#	__ = connect("capacity_changed", self, "_on_Direction_direction_changed")
+#	set_direction(compute_initial_direction())
+	_direction = compute_initial_direction()
+	var __ : int 
+	__ = connect("capacity_changed", self, "_on_Direction_capacity_changed")
+	__ = connect("direction_changed", self, "_on_Direction_direction_changed")
 	print("Name : ", name, " Vector : ", _direction, " global_rotate ", global_rotation_degrees)
 	
 
-
-func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
 	$Sprite.visible = is_enable() && is_display()
 	$Label.visible = is_enable() && is_debug() && is_display()
 	for __child in get_children() :
 		if __child is RayCast2D :
 			__child.enabled = is_enable()
-	.on_capacity_enable_changed(value)
+	.on_capacity_enable_changed(enabled)
 
-
-func on_capacity_rotation_changed() -> void :
+func on_capacity_rotated(new_direction : Vector2) -> void :
 	set_direction(compute_global_direction())
+	.on_capacity_rotation_changed(new_direction)
 
 
 func free() -> void :
@@ -152,3 +153,4 @@ func _on_Direction_capacity_changed(direction : Vector2, available : bool) -> vo
 func _on_Direction_direction_changed(new_direction :Vector2) -> void : 
 	if is_display() && is_debug() :
 		$Label.set_text(name + "\n" + Utils.get_direction_name(get_direction()))
+

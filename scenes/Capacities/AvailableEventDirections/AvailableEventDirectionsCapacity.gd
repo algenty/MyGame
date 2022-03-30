@@ -25,24 +25,17 @@ func init() -> void :
 			DEBUG.critical("[%s] is not a DirectionCapacty in [%s]" % [__child.name, name])
 		elif __child is DirectionCapacty :
 			__child.set_size(init_raycast_size)
-#	var _owner : Object = get_owner_node()
-#	if rotate_with_owner :
-#		# Init direction angle
-#		if _owner.has_method("get_direction") :
-#			initial_direction = _owner.get_direction()
-#		else :
-#			DEBUG.critical("Owner [%s] has not method get_direction to calculate rotation with initial direction")
-#		# Connect signal direction changed	
-#		if _owner.has_signal("direction_changed") :
-#			assert(_owner.connect("direction_changed", self, "_on_owner_direction_changed") == 0)
-#		else :
-#			DEBUG.error("No signal [direction_changed] for owner") 
 
-func on_capacity_enable_changed(value : bool = is_enable()) -> void :
-	.on_capacity_enable_changed(value)
-	if is_enable() :
+func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(enabled)
+	if enabled :
 		_random.randomize()
 		update()
+		
+func on_capacity_rotation_changed(new_direction : Vector2) -> void :
+	for __child in get_children():
+		if __child is DirectionCapacty :
+			__child.on_capacity_rotated(new_direction)
 
 func free() -> void :
 	_available_directions.clear()
