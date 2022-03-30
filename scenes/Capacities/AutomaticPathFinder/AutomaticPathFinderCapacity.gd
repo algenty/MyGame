@@ -35,8 +35,8 @@ func init() -> void :
 			DEBUG.critical("Owner has no method [%s]" % owner_method_direction )
 
 
-func set_activate() -> void :
-	.set_activate()
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
 	if is_enable() :
 		refresh_obstables()
 		refresh_target()

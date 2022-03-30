@@ -28,7 +28,7 @@ func init() -> void :
 	yield(owner, "ready")
 	set_display(_display)
 	set_debug(_debug)
-	set_activate()
+	on_capacity_enable_changed()
 	var __agent : = get_owner_node()
 	if __agent == null :
 		DEBUG.critical("Owner node must be assigned to the capacity")
@@ -63,12 +63,12 @@ func get_owner_node() -> Node :
 func set_enable(value : bool) -> void :
 	if _enable != value :
 		_enable = value
-		set_activate()
+		on_capacity_enable_changed(value)
 
 func is_enable() -> bool :
 	return _enable
 
-func set_activate() -> void :
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
 	set_physics_process(is_enable() && process_mode)
 	set_process(is_enable() && process_mode)
 	set_process_input(is_enable())

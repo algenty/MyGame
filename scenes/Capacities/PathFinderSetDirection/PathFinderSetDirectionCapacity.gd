@@ -87,8 +87,8 @@ func input(event):
 				set_target(__target)
 
 
-func set_activate() -> void :
-	.set_activate()
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
 	$Line2D.visible = is_enable() && is_display()
 
 

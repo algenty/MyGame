@@ -115,8 +115,8 @@ func get_finded_path() -> Array :
 	return _path
 
 
-func set_activate() -> void :
-	.set_activate()
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
 	if is_enable() && is_display() :
 		_exclude_texture = preload(TEXTURE_EXCLUDE)
 	$Line2D.visible = is_enable() && is_display()

@@ -53,7 +53,8 @@ func update(_delta : float = get_physics_process_delta_time()) -> void :
 
 
 ### ACCESSORS ###
-func set_activate() -> void :
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
 	if is_enable() :
 		_random.randomize()
 	$AvailableEvent.set_enable(is_enable())

@@ -36,13 +36,13 @@ func init() -> void :
 	
 
 
-func set_activate() -> void :
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
 	$Sprite.visible = is_enable() && is_display()
 	$Label.visible = is_enable() && is_debug() && is_display()
 	for __child in get_children() :
 		if __child is RayCast2D :
 			__child.enabled = is_enable()
-	.set_activate()
+	.on_capacity_enable_changed(value)
 
 
 func on_capacity_rotation_changed() -> void :

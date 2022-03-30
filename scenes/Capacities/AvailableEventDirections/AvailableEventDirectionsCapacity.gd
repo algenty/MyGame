@@ -38,8 +38,8 @@ func init() -> void :
 #		else :
 #			DEBUG.error("No signal [direction_changed] for owner") 
 
-func set_activate() -> void :
-	.set_activate()
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
 	if is_enable() :
 		_random.randomize()
 		update()

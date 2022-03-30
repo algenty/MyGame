@@ -65,8 +65,8 @@ func set_direction(value : Vector2) -> void :
 func get_direction() -> Vector2 :
 	return _direction
 
-func set_activate() -> void :
-	.set_activate()
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
 	$InputEvent.set_enable(is_enable())
 	$AvailableEvent.set_enable(is_enable())
 
