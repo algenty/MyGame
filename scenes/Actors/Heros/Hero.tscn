@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/Actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Actors/Heros/Hero.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Actors/Heroes/Hero.png" type="Texture" id=3]
-[ext_resource path="res://scenes/Capacities/InputSetDirection/InputSetDirectionCapacity.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Capacities/StateHandler/State/State.tscn" type="PackedScene" id=6]
 
 [node name="Hero" instance=ExtResource( 1 )]
@@ -32,7 +32,14 @@ owner_node = NodePath("../..")
 owner_function = "move"
 debug = true
 
-[node name="InputSetDirectionCapacity" parent="." index="4" instance=ExtResource( 5 )]
-owner_node = NodePath("..")
-_debug = true
-_display = true
+[node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 4 )]
+
+[node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
+_enable = false
+
+[editable path="RandomSetDirectionCapacity"]
+[editable path="RandomSetDirectionCapacity/AvailableEvent"]
+[editable path="RandomSetDirectionCapacity/AvailableEvent/Front"]
+[editable path="RandomSetDirectionCapacity/AvailableEvent/Back"]
+[editable path="RandomSetDirectionCapacity/AvailableEvent/Left"]
+[editable path="RandomSetDirectionCapacity/AvailableEvent/Right"]

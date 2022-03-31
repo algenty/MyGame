@@ -33,6 +33,7 @@ func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
 		update()
 		
 func on_capacity_rotation_changed(new_direction : Vector2) -> void :
+	.on_capacity_rotation_changed(new_direction)
 	for __child in get_children():
 		if __child is DirectionCapacty :
 			__child.on_capacity_rotated(new_direction)

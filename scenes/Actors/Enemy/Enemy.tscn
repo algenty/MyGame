@@ -38,6 +38,23 @@ owner_node = NodePath("../..")
 _debug = true
 _display = true
 
+[node name="Front" parent="RandomSetDirectionCapacity/AvailableEvent" index="0"]
+_debug = true
+_display = true
+weight = 20
+
+[node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
+_debug = true
+_display = true
+
+[node name="Left" parent="RandomSetDirectionCapacity/AvailableEvent" index="2"]
+_debug = true
+_display = true
+
+[node name="Right" parent="RandomSetDirectionCapacity/AvailableEvent" index="3"]
+_debug = true
+_display = true
+
 [editable path="RandomSetDirectionCapacity"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent/Front"]
