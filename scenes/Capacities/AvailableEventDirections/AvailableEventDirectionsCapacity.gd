@@ -26,17 +26,6 @@ func init() -> void :
 		elif __child is DirectionCapacty :
 			__child.set_size(init_raycast_size)
 
-func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
-	.on_capacity_enable_changed(enabled)
-	if enabled :
-		_random.randomize()
-		update()
-		
-func on_capacity_rotation_changed(new_direction : Vector2) -> void :
-	.on_capacity_rotation_changed(new_direction)
-	for __child in get_children():
-		if __child is DirectionCapacty :
-			__child.on_capacity_rotated(new_direction)
 
 func free() -> void :
 	_available_directions.clear()
@@ -105,18 +94,6 @@ func _remove_direction(child : DirectionCapacty) -> bool :
 	return false
 
 
-#func get_capacity(direction_or_name) -> DirectionCapacty :
-#	for __child in get_children() :
-#		if __child is DirectionCapacty : 
-#			if direction_or_name is String && __child.get_name() == direction_or_name :
-#				return __child
-#			elif direction_or_name is Vector2 && __child.get_direction() == direction_or_name :
-#				return __child
-#	return null
-
-#func set_enable_direction(direction_or_name, __enable  = true) -> void :
-#	init_when_enable()
-
 func get_random_direction(with_weight : bool = true) -> Vector2 :
 	if not process_mode : 
 		update() 
@@ -146,9 +123,9 @@ func _on_self_available_directions_changed(available_dirs : Array) -> void :
 		ONSCREEN.put(get_owner_node(), "Available Dir.", available_dirs)
 
 
-#func _on_owner_direction_changed(direction : Vector2) -> void :
-#	if rotate_with_owner :
-#		rotation = initial_direction.angle()  - direction.angle()
-#		for __child in get_children() :
-#			if __child is DirectionCapacty :
-#				__child.compute_default_direction()
+func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(enabled)
+	if enabled :
+		_random.randomize()
+		update()
+

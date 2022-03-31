@@ -20,10 +20,11 @@ export(bool) var _display : bool = true  setget set_display, is_display
 export(bool) var rotate_with_direction_owner : bool = false
 
 ### Variable
-var _init_direction : Vector2
+#var _init_direction : Vector2
 
 ### Signals
-#signal capacity_rotated(new_direction)
+signal capacity_rotated(new_direction)
+signal capacity_enabled(new_value)
 
 
 ### INIT  & UPDATE & EXIT ###
@@ -32,6 +33,9 @@ func init() -> void :
 	set_display(_display)
 	set_debug(_debug)
 	on_capacity_enable_changed()
+	var error : int
+	error = connect("capacity_enabled", self, "on_capacity_enable_changed")
+	error = connect("capacity_rotated", self, "on_capacity_rotation_changed")
 	var __agent : = get_owner_node()
 	if __agent == null :
 		DEBUG.critical("Owner node must be assigned to the capacity")
@@ -41,10 +45,8 @@ func init() -> void :
 			DEBUG.critical("Owner node [%s] have no signal [%s]" % [__agent, SIGNAL_DIRECTION_CHANGED])
 		if not VARIABLE_INITIAL_DIRECTION in __agent :
 			DEBUG.critical("Owner node [%s] have no variable [%s]" % [__agent, VARIABLE_INITIAL_DIRECTION])
-		_init_direction = __agent.get(VARIABLE_INITIAL_DIRECTION)
-		var error : int 
+#		_init_direction = __agent.get(VARIABLE_INITIAL_DIRECTION)
 		error = __agent.connect(SIGNAL_DIRECTION_CHANGED, self, "rotate_capacity")
-#		error = connect("capacity_rotated", self, "on_capacity_rotation_changed")
 		if error : 
 			DEBUG.critical("Unable to connect Signal [%s] with owner node [%s]" % [SIGNAL_DIRECTION_CHANGED, __agent])
 		pass
@@ -71,18 +73,11 @@ func get_owner_node() -> Node :
 func set_enable(value : bool) -> void :
 	if _enable != value :
 		_enable = value
-		on_capacity_enable_changed(value)
+		emit_signal("capacity_enabled", value)
+#		on_capacity_enable_changed(value)
 
 func is_enable() -> bool :
 	return _enable
-
-func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
-	set_physics_process(enabled && process_mode)
-	set_process(enabled && process_mode)
-	set_process_input(enabled)
-
-func on_capacity_rotation_changed(new_direction : Vector2) -> void :
-	pass
 
 func set_display(value : bool) -> void :
 	_display = value
@@ -124,6 +119,17 @@ func rotate_capacity(rotation_direction : Vector2, rounded : bool = true) -> voi
 	if rounded :
 		rotation_direction = rotation_direction.round()
 	set_rotation(rotation_direction.angle() - Vector2.DOWN.angle())
-#	emit_signal("capacity_rotated")
-	on_capacity_rotation_changed(rotation_direction)
+	emit_signal("capacity_rotated", rotation_direction)
+#	on_capacity_rotation_changed(rotation_direction)
 
+
+### EVENTS ###
+func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
+	set_physics_process(enabled && process_mode)
+	set_process(enabled && process_mode)
+	set_process_input(enabled)
+
+func on_capacity_rotation_changed(new_direction : Vector2) -> void :
+	for __child in get_children():
+		if __child.has_method("on_capacity_rotation_changed") :
+			__child.on_capacity_rotated(new_direction)

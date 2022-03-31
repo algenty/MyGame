@@ -11,8 +11,9 @@ collision_layer = 32
 collision_mask = 88
 script = ExtResource( 2 )
 debug = true
-init_max_speed = 80.0
+init_max_speed = 100.0
 group_name = "Heros"
+is_bot = true
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
@@ -33,13 +34,6 @@ owner_function = "move"
 debug = true
 
 [node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 4 )]
-
-[node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
-_enable = false
+owner_min_distance_before_change = 20.0
 
 [editable path="RandomSetDirectionCapacity"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Front"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Back"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Left"]
-[editable path="RandomSetDirectionCapacity/AvailableEvent/Right"]
