@@ -8,9 +8,12 @@ script = ExtResource( 1 )
 
 [node name="PathFinderSetDirection" parent="." instance=ExtResource( 2 )]
 owner_node = NodePath("..")
+_debug = true
+add_disable_point_with_mouse = false
+change_path_with_mouse = false
 
 [node name="PathFinderCapacity" parent="PathFinderSetDirection" index="0"]
-_display = false
+_debug = true
 add_disable_point_with_mouse = false
 
 [connection signal="path_achieved" from="PathFinderSetDirection" to="." method="_on_PathFinderSetDirection_path_achieved"]

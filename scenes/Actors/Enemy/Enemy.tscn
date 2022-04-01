@@ -44,6 +44,7 @@ _display = true
 weight = 20
 
 [node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
+_enable = false
 _debug = true
 _display = true
 

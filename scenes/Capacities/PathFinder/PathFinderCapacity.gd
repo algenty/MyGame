@@ -36,6 +36,7 @@ onready var _line2D = $Line2D
 
 ### Signals
 signal path_generated(reversed_path)
+signal no_path_finded()
 signal point_excluded(world_point)
 signal point_included(world_point)
 
@@ -200,16 +201,16 @@ func get_random_available_points() -> Vector2 :
 	var __cell : Vector2
 	var __uid : int
 	var __index : int
-	var __try : int = NUMBER_OF_TRY_RANDOM_POINT
-	while (not __available || not __try) :
-		__try -= 1
-		__index = __random.randi() % _navigable_points.size()
-		__world_point = _navigable_points[__index]
-		__cell = _levelmap.point2cell(__world_point)
-		__uid = get_cell_uid(__cell)
-		__available = ! _astart.is_point_disabled(__uid)
-		if not __available :
-			DEBUG.warning("Point [%s] is not available" % __world_point)
+#	var __try : int = NUMBER_OF_TRY_RANDOM_POINT
+#	while (not __available || not __try) :
+#		__try -= 1
+	__index = __random.randi() % _navigable_points.size()
+	__world_point = _navigable_points[__index]
+	__cell = _levelmap.point2cell(__world_point)
+	__uid = get_cell_uid(__cell)
+	__available = ! _astart.is_point_disabled(__uid)
+	if not __available :
+		DEBUG.warning("Point [%s] is not available" % __world_point)
 	return __world_point
 
 
@@ -223,17 +224,17 @@ func find_path(from : Vector2 = _global_origin, to: Vector2 = _global_target, ex
 
 	disable_points_array(exclude_points)
 	var __path_cells : =  _astart.get_point_path(__from_cell_uid, __to_cell_uid)
-#	reset_disabled_points()
-	
 	var __path_points : Array = []
-
-	# Convert all cells pos to global
-	for __i  in range(1, __path_cells.size() - 1) :
-		var __cell = __path_cells[__i]
-		var __point : Vector2 = _levelmap.cell2point(__cell)
-		__path_points.append(__point)
-	# Last point is "to"
-	__path_points.append(__to_rounded)
+	if __path_cells.size() == 0 :
+		emit_signal("no_path_finded")
+	else :
+		# Convert all cells pos to global
+		for __i  in range(1, __path_cells.size() - 1) :
+			var __cell = __path_cells[__i]
+			var __point : Vector2 = _levelmap.cell2point(__cell)
+			__path_points.append(__point)
+		# Last point is "to"
+		__path_points.append(__to_rounded)
 	return __path_points
 
 

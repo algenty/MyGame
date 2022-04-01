@@ -33,6 +33,7 @@ signal target_changed(target)
 signal taken_path_changed(_taken_path)
 signal path_achieved(position)
 
+
 ### INIT  & UPDATE & EXIT ###
 func init() -> void :
 	.init()
@@ -110,7 +111,7 @@ func set_target(value : Vector2, force : bool = false) -> void :
 	if value != _target || force:
 		_target = value
 		_pathfinder.set_origin(get_owner_node().global_position)
-		_pathfinder.set_target(_target)
+		_pathfinder.set_target(_target, true)
 #		_pathfinder.get_finded_path()
 		set_physics_process(true)
 		clear_taken_points()
