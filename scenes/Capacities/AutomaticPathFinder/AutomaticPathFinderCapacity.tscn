@@ -5,6 +5,7 @@
 
 [node name="AutomaticPathFinderCapacity" type="Node2D"]
 script = ExtResource( 1 )
+refresh_path_every_seconds = 1.0
 
 [node name="PathFinderSetDirection" parent="." instance=ExtResource( 2 )]
 owner_node = NodePath("..")

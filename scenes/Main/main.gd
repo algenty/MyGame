@@ -20,8 +20,6 @@ func _ready():
 #	add_child(timer)
 #	timer.connect("timeout", self, "new_enemy")
 #	timer.start(5.0)
-	
-	pass
 #	if ! label_position_enable : 
 #		label_position.visible = false
 #		return

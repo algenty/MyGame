@@ -112,7 +112,6 @@ func set_target(value : Vector2, force : bool = false) -> void :
 		_target = value
 		_pathfinder.set_origin(get_owner_node().global_position)
 		_pathfinder.set_target(_target, true)
-#		_pathfinder.get_finded_path()
 		set_physics_process(true)
 		clear_taken_points()
 		emit_signal("target_changed", value)

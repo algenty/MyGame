@@ -107,7 +107,6 @@ func refresh_obstables() -> void :
 
 
 func refresh_target() -> void :
-#	var level_map : LevelMap = get_tree().get_nodes_in_group(CONSTANTS.GROUP_LEVELMAP)[0]
 	var __target = $PathFinderSetDirection/PathFinderCapacity.get_random_available_points()
 	set_target(__target)
 

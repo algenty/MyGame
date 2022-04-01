@@ -40,6 +40,6 @@ owner_min_distance_before_change = 20.0
 
 [node name="AutomaticPathFinderCapacity" parent="." index="5" instance=ExtResource( 5 )]
 _debug = true
-refresh_path_every_seconds = 1.0
+refresh_path_every_seconds = 0.1
 
 [editable path="RandomSetDirectionCapacity"]
