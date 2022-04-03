@@ -23,8 +23,8 @@ var _last_input_direction : Vector2 = Vector2.ZERO
 signal direction_changed(direction)
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
-	.init()
+func init_capacity() -> void :
+	.init_capacity()
 	### INIT CHILD
 	_input_event = $InputEvent
 	_available_event = $AvailableEvent
@@ -45,11 +45,11 @@ func init() -> void :
 	__ = _available_event.connect("available_directions_changed", self, "_on_available_event_available_directions_changed")
 
 
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 
 
-func update(_delta : float = 0.0) -> void :
+func update_capacity(_delta : float = 0.0) -> void :
 	pass
 
 

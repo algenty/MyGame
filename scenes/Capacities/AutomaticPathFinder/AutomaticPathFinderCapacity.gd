@@ -22,9 +22,9 @@ signal target_changed(target)
 signal direction_changed(direction)
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
+func init_capacity() -> void :
 	### INITS
-	.init()
+	.init_capacity()
 	# Set_activate in mother
 	### CHECKS
 	var __agent = get_owner_node()
@@ -56,12 +56,12 @@ func on_capacity_enable_changed(value : bool = is_enable()) -> void :
 	$PathFinderSetDirection.set_enable(is_enable())
 
 
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 
 
-func update(delta : float = get_physics_process_delta_time()) -> void :
-	.update(delta)
+func update_capacity(delta : float = get_physics_process_delta_time()) -> void :
+	.update_capacity(delta)
 
 
 ### ACCESSORS ###

@@ -1,6 +1,9 @@
 extends Actor
 class_name Hero
 
+###
+const GROUP_NAME = CONSTANTS.GROUP_HEROES
+
 ### INIT/UPDATE/FREE ###
 func init_actor() -> void :
 #	if is_bot :

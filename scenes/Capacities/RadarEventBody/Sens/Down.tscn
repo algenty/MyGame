@@ -5,11 +5,13 @@
 
 [node name="Down" type="Node2D"]
 script = ExtResource( 2 )
+_debug = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+z_as_relative = false
 enabled = true
 cast_to = Vector2( 0, 100 )
-collision_mask = 56
+collision_mask = 32
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

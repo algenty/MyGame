@@ -41,8 +41,8 @@ signal point_excluded(world_point)
 signal point_included(world_point)
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
-	.init()
+func init_capacity() -> void :
+	.init_capacity()
 	if tilemaps_group == null || tilemaps_group.empty() :
 		DEBUG.critical("No group defined for tilemap")
 	var __levelmaps : Array = get_tree().get_nodes_in_group(tilemaps_group)
@@ -66,15 +66,15 @@ func init() -> void :
 	if __agent : set_origin(__agent.global_position)
 
 
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 
 
-func update(_delta : float = 0.0) -> void :
+func update_capacity(_delta : float = 0.0) -> void :
 	DEBUG.warning("Process Mode is nt necessary for this capacity")
 
 
-func input(event):
+func input_capacity(event):
 	if event is InputEventMouseButton :
 		if change_path_with_mouse && event.button_index == BUTTON_LEFT and event.pressed and is_debug() :
 			set_target(get_global_mouse_position())

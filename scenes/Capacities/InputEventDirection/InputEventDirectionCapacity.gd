@@ -24,7 +24,8 @@ signal input_direction_changed(direction)
 signal input_key_state_changed(key, value)
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
+func init_capacity() -> void :
+	.init_capacity()
 #	var __ : int = 0
 #	__ = connect("input_key_state_changed", self, "_on_self_input_key_state_changed")
 #	__ = connect("input_direction_changed", self, "_on_self_input_direction_changed")
@@ -35,7 +36,6 @@ func init() -> void :
 	
 	### Init Sprites
 	init_when_enable()
-	.init()
 
 func init_when_enable() -> void :
 	if not is_display()  or not is_enable() :
@@ -44,25 +44,25 @@ func init_when_enable() -> void :
 				_child.visible = false
 
 
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 
 
-func update(_delta : float = 0.0) -> void :
+func update_capacity(_delta : float = 0.0) -> void :
 	for key in keys :
 		set_key_state(key, Input.is_action_pressed(key))
-	.update()
+	.update_capacity()
 
 
-func input(event : InputEvent) -> void :
+func input_capacity(event : InputEvent) -> void :
 	if not is_enable() : return
 	var _hash = _keys_state.hash()
-	if not process_mode : update()
+	if not process_mode : update_capacity()
 	var _new_direction : Vector2 = Vector2.ZERO
 	if event is InputEventKey :
-		update()
+		update_capacity()
 		set_direction(compute_direction())
-	.input(event)
+	.input_capacity(event)
 
 ### ACCESSORS ###
 func set_direction(value : Vector2) -> void :
@@ -99,9 +99,6 @@ func set_enable(value : bool) -> void :
 
 
 ### BUIT-IT ###
-#func _input(event):
-#	input(event)
-
 #IN MOTHER CLASS CAPACITY
 
 

@@ -5,15 +5,17 @@
 
 [node name="RadarBodyCapacity" type="Node2D"]
 script = ExtResource( 3 )
-dectector_size = 10
 
 [node name="Up" parent="." instance=ExtResource( 1 )]
 rotation = 3.14159
+_debug = false
 
 [node name="Down" parent="." instance=ExtResource( 1 )]
+_debug = false
 
 [node name="Left" parent="." instance=ExtResource( 1 )]
 rotation = 1.5708
+_debug = false
 
 [node name="Right" parent="." instance=ExtResource( 1 )]
 rotation = -1.5708

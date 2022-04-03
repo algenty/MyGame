@@ -13,42 +13,28 @@ onready var inital_zoom = $Camera2D.zoom
 signal zoom_changed(zoom)
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
+func init_capacity() -> void :
+	.init_capacity()
 	if $Camera2D :
 		$Camera2D.visible = false
-	.init()
 	
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 	
-func update(delta : float = 0.0) -> void :
-	.update()
+func update_capacity(delta : float = 0.0) -> void :
+	.update_capacity()
 
-func input(event : InputEvent) -> void :
+func input_capacity(event : InputEvent) -> void :
 	if not is_enable() : return
 	if Utils.is_input_camera(event) && enable_input_mouse : 
 		if event.button_index == BUTTON_WHEEL_UP :
 			zoom()
 		if event.button_index == BUTTON_WHEEL_DOWN :
 			unzoom()
-	.input(event)
+	.input_capacity(event)
 	
 ### BUIT-IT ###
-#func _ready():
-#	init()
-##	yield(_owner, "ready")
-#
-#func _exit_tree():
-#	free()
-#
-#func _physics_process(delta):
-#	update(delta)
-#
-#func _input(event):
-#	input(event)
-#
-#func _unhandled_input(event):
-#	input(event)
+
 
 ### LOGIC ###
 func unzoom(value : Vector2 = zoom_speed) -> void :

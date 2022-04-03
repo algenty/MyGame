@@ -13,7 +13,7 @@ func _physics_process(my_delta):
 	if enable :
 		zoom = lerp(zoom, des_zoom, 0.2)
 
-func _input(event):
+func _input_capacity(event):
 	if enable && event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_WHEEL_UP:

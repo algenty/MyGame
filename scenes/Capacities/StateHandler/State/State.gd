@@ -22,13 +22,13 @@ signal state_finished(state, result)
 
 ### BUILT-IN ###
 func _ready():
-	init()
+	init_state()
 
 func _exit_tree():
-	free()
+	pass
 
 ### INIT/UPDATE/FREE ###
-func init() -> void :
+func init_state() -> void :
 	if owner_node == null : DEBUG.critical("Owner node cannot be null")
 	if owner_function == null or owner_function.empty() : DEBUG.critical("Owner function cannot be empty")
 	var _agent := get_node(owner_node)
@@ -36,27 +36,27 @@ func init() -> void :
 	if !_agent.has_method(owner_function) : DEBUG.critical("Owner function not valid")
 
 ### INTERFACES ###
-func enter() -> void :
+func enter_state() -> void :
 	_is_running = true
 	_is_finished = false
 	_result = RESULT.RUNNING
 
-func exit() -> void :
+func exit_state() -> void :
 	_is_running = false
 	
-func finish() -> void :
+func finish_state() -> void :
 	_is_running = false
 	_is_finished = true
 	emit_signal("state_finished", self)
 	
-func update(delta:float) -> void :
+func update_state(delta:float) -> void :
 	var result_call = get_owner_node().call(owner_function, delta)
 	if  ! ignore_return_code :
 		if result_call : 
 			_result = RESULT.SUCCESS
 		else :
 			_result = RESULT.FAILED
-			finish()
+			finish_state()
 
 ### ACCESSORS ###
 func is_running() -> bool :

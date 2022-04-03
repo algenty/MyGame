@@ -5,6 +5,7 @@ class_name Capacity
 const SIGNAL_DIRECTION_CHANGED = "direction_changed"
 const VARIABLE_INITIAL_DIRECTION = "init_direction"
 
+
 ### Exports
 # Owner
 export(NodePath) onready var owner_node = owner setget set_owner_node,get_owner_node
@@ -28,7 +29,7 @@ signal capacity_enabled(new_value)
 
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
+func init_capacity() -> void :
 	yield(owner, "ready")
 	set_display(_display)
 	set_debug(_debug)
@@ -51,15 +52,17 @@ func init() -> void :
 			DEBUG.critical("Unable to connect Signal [%s] with owner node [%s]" % [SIGNAL_DIRECTION_CHANGED, __agent])
 		pass
 
+func draw_capacity() -> void :
+	pass
 
-
-func free() -> void :
+func free_capacity() -> void :
 	pass
 	
-func update(_delta : float = 0.0) -> void :
+func update_capacity(_delta : float = 0.0) -> void :
+	update()
 	pass
 
-func input(_event : InputEvent) -> void :
+func input_capacity(_event : InputEvent) -> void :
 	pass
 
 ### ACCESSORS ###
@@ -103,16 +106,24 @@ func is_debug()  -> bool :
 
 ### BUIT-IT ###
 func _ready():
-	init()
+	init_capacity()
+
 
 func _exit_tree():
-	free()
-	
+	free_capacity()
+
+
 func _physics_process(delta):
-	update(delta)
+	update_capacity(delta)
+
 
 func _input(event):
-	input(event)
+	input_capacity(event)
+
+
+func _draw():
+	draw_capacity()
+
 
 ### LOGIC ###
 func rotate_capacity(rotation_direction : Vector2, rounded : bool = true) -> void :

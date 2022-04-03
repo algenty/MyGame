@@ -35,8 +35,8 @@ signal path_achieved(position)
 
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
-	.init()
+func init_capacity() -> void :
+	.init_capacity()
 	### INIT CHILD
 	var __agent = get_owner_node()
 	$PathFinderCapacity.enable_diagonals = enable_diagonals
@@ -63,11 +63,11 @@ func init() -> void :
 	__ = self.connect("target_changed", self, "_on_self_target_changed")
 	__ = self.connect("taken_path_changed", self, "_on_self_taken_path_changed")
 
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 
 
-func update(_delta : float = 0.0) -> void :
+func update_capacity(_delta : float = 0.0) -> void :
 	if _pathfinder.has_path() :
 		_owner_current_postion = get_owner_node().global_position
 		var __targeted : bool = _pathfinder.is_on_target(_owner_current_postion)
@@ -80,7 +80,7 @@ func update(_delta : float = 0.0) -> void :
 		pass
 
 
-func input(event):
+func input_capacity(event):
 	if event is InputEventMouseButton and is_enable() :
 		if change_path_with_mouse && event.button_index == BUTTON_LEFT and event.pressed :
 			var __target = get_global_mouse_position()

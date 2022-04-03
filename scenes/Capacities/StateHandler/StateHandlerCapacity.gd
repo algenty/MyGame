@@ -66,7 +66,7 @@ func _exit_state(value : State = get_state()) -> void :
 			var _state_in_back : State = _stack_states.pop_back()
 			if _state_in_back.get_name() != value.get_name() : 
 				DEBUG.warning("State in stack must be the same : [%s] [%s]" % [_state_in_back.get_name(), value.get_name()])
-	value.exit()
+	value.exit_state()
 
 
 func _enter_state(value : State = get_state()) -> void :
@@ -77,11 +77,12 @@ func _enter_state(value : State = get_state()) -> void :
 		_stack_states.append(value)
 	_state = value
 	_state_name = _state.name
-	value.enter()
+	value.enter_state()
 
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
+func init_capacity() -> void :
+	.init_capacity()
 	if is_enable() :
 		var __agent = owner_node
 		if !__agent : DEBUG.critical("Owner node not valid")
@@ -102,14 +103,14 @@ func init() -> void :
 		if __first == null : 
 			DEBUG.critical("No state defined or default state name not exits")
 		set_state(__first)
-	.init()
 
-func free() -> void :
-	pass
+func free_capacity() -> void :
+	.free_capacity()
 
-func update(delta : float = get_physics_process_delta_time()) -> void :
+func update_capacity(delta : float = get_physics_process_delta_time()) -> void :
+	.update_capacity()
 	var __state = get_state()
-	if __state != null : _state.update(delta)
+	if __state != null : _state.update_state(delta)
 
 
 ### BUILT-IN ###

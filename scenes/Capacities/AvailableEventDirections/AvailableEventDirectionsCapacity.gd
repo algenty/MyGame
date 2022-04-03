@@ -16,9 +16,9 @@ var _random_weighted = RandomWeighted.new()
 export(int) var init_raycast_size : int = 10
 
 ### INIT  & EXIT ###
-func init() -> void :
+func init_capacity() -> void :
 	### CHECKS
-	.init()
+	.init_capacity()
 	var __ = connect("available_directions_changed", self, "_on_self_available_directions_changed")
 	for __child in get_children() :
 		if ! __child is DirectionCapacty :
@@ -27,12 +27,12 @@ func init() -> void :
 			__child.set_size(init_raycast_size)
 
 
-func free() -> void :
+func free_capacity() -> void :
 	_available_directions.clear()
-	.free()
+	.free_capacity()
 
 
-func update(_delta : float = 0.0) -> void :
+func update_capacity(_delta : float = 0.0) -> void :
 	var __hash = _available_names.hash()
 	var __changed = false
 	_clear_direction()
@@ -48,11 +48,11 @@ func update(_delta : float = 0.0) -> void :
 #	if __changed :
 	if _available_names.hash() != __hash :
 		emit_signal("available_directions_changed", _available_directions)
-	.update()
+	.update_capacity()
 
 ### LOGIC ###
 func is_available_direction(direction : Vector2) -> bool :
-	if not process_mode : update()
+	if not process_mode : update_capacity()
 	return direction in _available_directions
 
 
@@ -96,7 +96,7 @@ func _remove_direction(child : DirectionCapacty) -> bool :
 
 func get_random_direction(with_weight : bool = true) -> Vector2 :
 	if not process_mode : 
-		update() 
+		update_capacity() 
 	var __size = _available_directions.size()
 	if __size == 1 : return _available_directions[0]
 	if __size :
@@ -127,5 +127,5 @@ func on_capacity_enable_changed(enabled : bool = is_enable()) -> void :
 	.on_capacity_enable_changed(enabled)
 	if enabled :
 		_random.randomize()
-		update()
+		update_capacity()
 

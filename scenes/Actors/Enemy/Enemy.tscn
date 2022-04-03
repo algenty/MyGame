@@ -1,16 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Capacities/StateHandler/State/State.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Capacities/RandomSetDirection/RandomSetDirectionCapacity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Actors/Enemy/Enemy.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Actors/Enemies/Enemies.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Capacities/RadarEventBody/RadarBodyCapacity.tscn" type="PackedScene" id=6]
 
 [node name="Enemy" groups=["Enemies"] instance=ExtResource( 1 )]
 collision_layer = 16
 collision_mask = 40
 script = ExtResource( 4 )
-debug = true
 init_max_speed = 80.0
 group_name = "Enemies"
 is_bot = true
@@ -31,30 +31,19 @@ debug = true
 
 [node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 3 )]
 owner_node = NodePath("..")
-_debug = true
 
 [node name="AvailableEvent" parent="RandomSetDirectionCapacity" index="0"]
 owner_node = NodePath("../..")
-_debug = true
-_display = true
 
 [node name="Front" parent="RandomSetDirectionCapacity/AvailableEvent" index="0"]
-_debug = true
-_display = true
 weight = 20
 
 [node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
 _enable = false
-_debug = true
-_display = true
 
-[node name="Left" parent="RandomSetDirectionCapacity/AvailableEvent" index="2"]
+[node name="RadarBodyCapacity" parent="." index="5" instance=ExtResource( 6 )]
+owner_node = NodePath("..")
 _debug = true
-_display = true
-
-[node name="Right" parent="RandomSetDirectionCapacity/AvailableEvent" index="3"]
-_debug = true
-_display = true
 
 [editable path="RandomSetDirectionCapacity"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent"]

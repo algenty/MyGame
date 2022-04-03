@@ -11,27 +11,27 @@ var map_size : Vector2 = get_used_rect().size
 onready var half_cell_size = cell_size / 2
 
 ### INIT/UPDATE/FREE ###
-func init() -> void :
+func init_levelmap() -> void :
 	add_to_group(CONSTANTS.GROUP_LEVELMAP)
 	map_size = get_used_rect().size
 	pass
 	
-func free() -> void :
+func free_levelmap() -> void :
 	remove_from_group(CONSTANTS.GROUP_LEVELMAP)
 	pass
 
-func update(_delta : float = 0.0) -> void :
+func update_levelmap(_delta : float = 0.0) -> void :
 	pass
 
 ### BUILT-IN
 func _ready():
-	init()
+	init_levelmap()
 
 func _physics_process(delta):
-	update(delta)
+	update_levelmap(delta)
 
 func _exit_tree() -> void :
-	free()
+	free_levelmap()
 	
 
 ### LOGIC ###
@@ -123,7 +123,6 @@ func get_navigable_tileset_ids() -> Array :
 	var __all_ids : Array = tile_set.get_tiles_ids()
 	var __result : Array = []
 	for __id in __all_ids :
-#		print("Id : ", __id, " Name : ", tile_set.tile_get_name(__id),"Nav2D : ",tile_set.tile_get_navigation_polygon(__id))
 		if tile_set.tile_get_navigation_polygon(__id) != null :
 			__result.append(__id)
 	return __result

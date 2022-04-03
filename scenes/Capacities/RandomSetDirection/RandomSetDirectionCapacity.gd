@@ -25,8 +25,8 @@ var _old_position : Vector2 = Vector2.ZERO
 signal direction_changed(direction)
 
 ### INIT  & UPDATE & EXIT ###
-func init() -> void :
-	.init()
+func init_capacity() -> void :
+	.init_capacity()
 	
 	### INIT CHILD
 	var __agent = get_owner_node()
@@ -44,12 +44,12 @@ func init() -> void :
 	var __ = $AvailableEvent.connect("available_directions_changed", self, "_on_available_event_available_directions_changed")
 	__ = self.connect("direction_changed", self, "_on_self_direction_changed")
 
-func free() -> void :
-	.free()
+func free_capacity() -> void :
+	.free_capacity()
 
 
-func update(_delta : float = get_physics_process_delta_time()) -> void :
-	.update()
+func update_capacity(_delta : float = get_physics_process_delta_time()) -> void :
+	.update_capacity()
 
 
 ### ACCESSORS ###

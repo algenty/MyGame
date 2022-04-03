@@ -46,12 +46,12 @@ func put(my_name, my_key, my_value = null) :
 					__ = display.erase(my_name)
 		else :
 			_sub_dis[my_key] = str(my_value)
-		update()
+		update_screen()
 	else :
 		display[my_name] = {}
 		put(my_name, my_key, my_value)
 
-func update() :
+func update_screen() :
 	if ! enable : return
 	var _txt : String = ""
 	for _name in display.keys() :
@@ -64,4 +64,4 @@ func update() :
 func clear() :
 	if ! enable : return
 	display.clear()
-	update()
+	update_screen()
