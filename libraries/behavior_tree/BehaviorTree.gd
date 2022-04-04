@@ -29,13 +29,13 @@ func _ready():
 	if blackboard:
 		_blackboard = get_node_or_null(blackboard)
 	if !_blackboard:
-		printerr("BehaviorTree: must have valid blackboard")
+		DEBUG.critical("BehaviorTree: must have valid blackboard")
 		errors = true
 	
 	if agent:
 		_agent = get_node(agent)
 	if !_agent:
-		printerr("BehaviorTree: must have valid agent")
+		DEBUG.critical("BehaviorTree: must have valid agent")
 		errors = true
 	
 	_blackboard.agent = _agent
@@ -61,11 +61,11 @@ func _ready():
 
 func _validate_children() -> bool:
 	if get_child_count() != 1:
-		printerr("BehaviorTree: exactly one child required")
+		DEBUG.error("BehaviorTree: exactly one child required")
 		return false
 	var c = get_child(0)
 	if !c is BehaviorTreeNode:
-		printerr("BehaviorTree: child node must be a behavior node")
+		DEBUG.error("BehaviorTree: child node must be a behavior node")
 		return false
 	
 	return true

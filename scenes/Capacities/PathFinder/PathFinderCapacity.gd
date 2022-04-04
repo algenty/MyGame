@@ -12,8 +12,8 @@ const NUMBER_OF_TRY_RANDOM_POINT = 4
 ### Exports
 export(String) var tilemaps_group = CONSTANTS.GROUP_LEVELMAP
 export(bool) var enable_diagonals = false
-export(bool) var add_disable_point_with_mouse : bool = true
-export(bool) var change_path_with_mouse : bool = true
+export(bool) var add_disable_point_with_mouse : bool = false
+export(bool) var change_path_with_mouse : bool = false
 
 ### Variables
 var _astart : AStar2D = AStar2D.new()

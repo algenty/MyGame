@@ -82,6 +82,15 @@ func set_enable(value : bool) -> void :
 func is_enable() -> bool :
 	return _enable
 
+
+func enable() -> void :
+	set_enable(true)
+
+
+func disable() -> void :
+	set_enable(false)
+
+
 func set_display(value : bool) -> void :
 	_display = value
 	for __child in get_children() :

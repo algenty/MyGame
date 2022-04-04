@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/Actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Capacities/StateHandler/State/State.tscn" type="PackedScene" id=2]
@@ -6,6 +6,16 @@
 [ext_resource path="res://scenes/Actors/Enemy/Enemy.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Actors/Enemies/Enemies.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Capacities/RadarEventBody/RadarBodyCapacity.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Capacities/PathFinderSetDirection/PathFinderSetDirectionCapacity.tscn" type="PackedScene" id=7]
+[ext_resource path="res://libraries/behavior_tree/blackboard.gd" type="Script" id=8]
+[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_sequence.gd" type="Script" id=9]
+[ext_resource path="res://libraries/behavior_tree/BehaviorTree.gd" type="Script" id=10]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_set_blackboard_from_prop.gd" type="Script" id=11]
+[ext_resource path="res://libraries/behavior_tree/composite/behavior_tree_selector.gd" type="Script" id=12]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_call_simple_func_prop.gd" type="Script" id=13]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_check_blackboard_prop.gd" type="Script" id=14]
+[ext_resource path="res://libraries/behavior_tree/leaves/bt_call_simple_func.gd" type="Script" id=15]
+[ext_resource path="res://libraries/behavior_tree/decorator/behavior_tree_always_succeed.gd" type="Script" id=16]
 
 [node name="Enemy" groups=["Enemies"] instance=ExtResource( 1 )]
 collision_layer = 16
@@ -31,6 +41,7 @@ debug = true
 
 [node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 3 )]
 owner_node = NodePath("..")
+_enable = false
 
 [node name="AvailableEvent" parent="RandomSetDirectionCapacity" index="0"]
 owner_node = NodePath("../..")
@@ -44,6 +55,89 @@ _enable = false
 [node name="RadarBodyCapacity" parent="." index="5" instance=ExtResource( 6 )]
 owner_node = NodePath("..")
 _debug = true
+
+[node name="PathFinderSetDirection" parent="." index="6" instance=ExtResource( 7 )]
+_enable = false
+
+[node name="Blackboard" type="Node2D" parent="." index="7"]
+script = ExtResource( 8 )
+
+[node name="BehaviorTree" type="Node2D" parent="." index="8"]
+script = ExtResource( 10 )
+agent = NodePath("..")
+blackboard = NodePath("../Blackboard")
+sync_type = 0
+
+[node name="Tree" type="Node" parent="BehaviorTree" index="0"]
+script = ExtResource( 9 )
+
+[node name="Has_target" type="Node2D" parent="BehaviorTree/Tree" index="0"]
+script = ExtResource( 11 )
+node = NodePath("../../../RadarBodyCapacity")
+node_property_or_function_name = "has_target"
+blackboard_property_name = "has_target"
+
+[node name="Has_path" type="Node2D" parent="BehaviorTree/Tree" index="1"]
+script = ExtResource( 11 )
+node = NodePath("../../../PathFinderSetDirection")
+node_property_or_function_name = "has_path"
+blackboard_property_name = "has_path"
+
+[node name="Always" type="Node2D" parent="BehaviorTree/Tree" index="2"]
+script = ExtResource( 16 )
+
+[node name="Init Target" type="Node2D" parent="BehaviorTree/Tree/Always" index="0"]
+script = ExtResource( 9 )
+
+[node name="New target \?" type="Node2D" parent="BehaviorTree/Tree/Always/Init Target" index="0"]
+script = ExtResource( 14 )
+blackboard_property_name = "has_target"
+
+[node name="Get_target" type="Node2D" parent="BehaviorTree/Tree/Always/Init Target" index="1"]
+script = ExtResource( 11 )
+node = NodePath("../../../../../RadarBodyCapacity")
+node_property_or_function_name = "get_target"
+blackboard_property_name = "target"
+
+[node name="Give target" type="Node2D" parent="BehaviorTree/Tree/Always/Init Target" index="2"]
+script = ExtResource( 13 )
+node = NodePath("../../../../../PathFinderSetDirection")
+node_function_name = "set_target"
+blackboard_property_name = "target"
+
+[node name="One of this" type="Node2D" parent="BehaviorTree/Tree" index="3"]
+script = ExtResource( 12 )
+
+[node name="Chase" type="Node2D" parent="BehaviorTree/Tree/One of this" index="0"]
+script = ExtResource( 9 )
+
+[node name="has_path" type="Node2D" parent="BehaviorTree/Tree/One of this/Chase" index="0"]
+script = ExtResource( 14 )
+blackboard_property_name = "has_path"
+
+[node name="Disable random" type="Node2D" parent="BehaviorTree/Tree/One of this/Chase" index="1"]
+script = ExtResource( 15 )
+debug = true
+node = NodePath("../../../../../RandomSetDirectionCapacity")
+node_function_name = "disable"
+
+[node name="Enable path" type="Node2D" parent="BehaviorTree/Tree/One of this/Chase" index="2"]
+script = ExtResource( 15 )
+node = NodePath("../../../../../PathFinderSetDirection")
+node_function_name = "enable"
+
+[node name="Wander" type="Node2D" parent="BehaviorTree/Tree/One of this" index="1"]
+script = ExtResource( 9 )
+
+[node name="Disable path" type="Node2D" parent="BehaviorTree/Tree/One of this/Wander" index="0"]
+script = ExtResource( 15 )
+node = NodePath("../../../../../PathFinderSetDirection")
+node_function_name = "disable"
+
+[node name="enable random" type="Node2D" parent="BehaviorTree/Tree/One of this/Wander" index="1"]
+script = ExtResource( 15 )
+node = NodePath("../../../../../RandomSetDirectionCapacity")
+node_function_name = "enable"
 
 [editable path="RandomSetDirectionCapacity"]
 [editable path="RandomSetDirectionCapacity/AvailableEvent"]

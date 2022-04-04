@@ -141,3 +141,17 @@ func get_uniq_name(my_obj : Object) -> String :
 	else :
 		return str(my_obj)
 
+
+func get_current_tree(current : Node) -> String :
+	var result : String = ""
+	if current != null :
+		var __name = current.get("name")
+		if __name != null :
+			result = str(__name)
+		else :
+			result = "Unknow"
+		var __parent = current.get_parent()
+		if __parent != null :
+			result = get_current_tree(__parent) + " -> " + result
+	return result
+		

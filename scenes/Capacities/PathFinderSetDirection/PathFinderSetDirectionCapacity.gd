@@ -15,7 +15,7 @@ export(bool) var change_path_with_mouse : bool = true
 
 ### Variables
 var _direction : Vector2 = Vector2.ZERO setget set_direction, get_direction
-var _target : Vector2 = Vector2.ZERO setget set_target, get_target
+var target : Vector2 = Vector2.ZERO setget set_target, get_target
 #var _generated_path : Array = []
 # True if owner have the method else use signal "direction_changed"
 var _owner_method_direction_available : bool = false
@@ -58,7 +58,6 @@ func init_capacity() -> void :
 
 	### SIGNALS
 	var __ : int
-#	__ = $PathFinderCapacity.connect("path_generated", self, "_on_pathfinder_path_generated")
 	__ = self.connect("direction_changed", self, "_on_self_direction_changed")
 	__ = self.connect("target_changed", self, "_on_self_target_changed")
 	__ = self.connect("taken_path_changed", self, "_on_self_taken_path_changed")
@@ -68,17 +67,23 @@ func free_capacity() -> void :
 
 
 func update_capacity(_delta : float = 0.0) -> void :
-	if _pathfinder.has_path() :
+	if has_path() :
 		_owner_current_postion = get_owner_node().global_position
 		var __targeted : bool = _pathfinder.is_on_target(_owner_current_postion)
 		if not __targeted :
 			var __direction : Vector2 = _pathfinder.get_direction(_owner_current_postion)
 			set_direction(__direction)
 		else :
+			target = Vector2.ZERO
 			emit_signal("path_achieved", _owner_current_postion)
 	else : 
 		pass
 
+func has_target() -> bool :
+	return target != Vector2.ZERO && target != null
+	
+func has_path() -> bool :
+	return _pathfinder.has_path()
 
 func input_capacity(event):
 	if event is InputEventMouseButton and is_enable() :
@@ -108,17 +113,17 @@ func get_direction() -> Vector2 :
 
 
 func set_target(value : Vector2, force : bool = false) -> void :
-	if value != _target || force:
-		_target = value
+	if value != target || force:
+		target = value
 		_pathfinder.set_origin(get_owner_node().global_position)
-		_pathfinder.set_target(_target, true)
+		_pathfinder.set_target(target, true)
 		set_physics_process(true)
 		clear_taken_points()
 		emit_signal("target_changed", value)
 
 
 func get_target() -> Vector2 :
-	return _target
+	return target
 
 
 func add_taken_point(world_point : Vector2) -> void :

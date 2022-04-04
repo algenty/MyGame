@@ -16,4 +16,5 @@ func break_on_debug() -> void:
 	if debug:
 		# to get to the code you want to debug, hit F10 till you see
 		# a behavior tree node's tick function call.  Then F11 into it.
+		print("BT : " + DEBUG.get_current_tree(self))
 		breakpoint

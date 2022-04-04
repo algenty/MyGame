@@ -1,6 +1,9 @@
 extends Actor
 class_name Enemy
 
+### Variables
+var target : Node = null
+
 ### INIT/UPDATE/FREE ###
 func init_actor() -> void :
 	.init_actor()
