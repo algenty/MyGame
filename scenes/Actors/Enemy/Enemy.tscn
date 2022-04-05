@@ -42,22 +42,32 @@ debug = true
 [node name="RandomSetDirectionCapacity" parent="." index="4" instance=ExtResource( 3 )]
 owner_node = NodePath("..")
 _enable = false
+_debug = true
+_display = true
 
 [node name="AvailableEvent" parent="RandomSetDirectionCapacity" index="0"]
 owner_node = NodePath("../..")
 
 [node name="Front" parent="RandomSetDirectionCapacity/AvailableEvent" index="0"]
-weight = 20
+weight = 50
 
 [node name="Back" parent="RandomSetDirectionCapacity/AvailableEvent" index="1"]
-_enable = false
+weight = 1
+
+[node name="Left" parent="RandomSetDirectionCapacity/AvailableEvent" index="2"]
+weight = 30
+
+[node name="Right" parent="RandomSetDirectionCapacity/AvailableEvent" index="3"]
+weight = 30
 
 [node name="RadarBodyCapacity" parent="." index="5" instance=ExtResource( 6 )]
 owner_node = NodePath("..")
 _debug = true
+dectector_size = 200
 
 [node name="PathFinderSetDirection" parent="." index="6" instance=ExtResource( 7 )]
 _enable = false
+_debug = true
 
 [node name="Blackboard" type="Node2D" parent="." index="7"]
 script = ExtResource( 8 )
@@ -96,14 +106,14 @@ blackboard_property_name = "has_target"
 [node name="Get_target" type="Node2D" parent="BehaviorTree/Tree/Always/Init Target" index="1"]
 script = ExtResource( 11 )
 node = NodePath("../../../../../RadarBodyCapacity")
-node_property_or_function_name = "get_target"
-blackboard_property_name = "target"
+node_property_or_function_name = "get_target_position"
+blackboard_property_name = "target_position"
 
 [node name="Give target" type="Node2D" parent="BehaviorTree/Tree/Always/Init Target" index="2"]
 script = ExtResource( 13 )
 node = NodePath("../../../../../PathFinderSetDirection")
 node_function_name = "set_target"
-blackboard_property_name = "target"
+blackboard_property_name = "target_position"
 
 [node name="One of this" type="Node2D" parent="BehaviorTree/Tree" index="3"]
 script = ExtResource( 12 )
@@ -117,7 +127,6 @@ blackboard_property_name = "has_path"
 
 [node name="Disable random" type="Node2D" parent="BehaviorTree/Tree/One of this/Chase" index="1"]
 script = ExtResource( 15 )
-debug = true
 node = NodePath("../../../../../RandomSetDirectionCapacity")
 node_function_name = "disable"
 

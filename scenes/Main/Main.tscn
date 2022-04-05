@@ -41,6 +41,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="Enemy" parent="Position2" instance=ExtResource( 3 )]
+
 [node name="Position3" type="Position2D" parent="."]
 position = Vector2( 24, 136 )
 __meta__ = {

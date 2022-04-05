@@ -84,6 +84,7 @@ func _run(delta: float) -> void:
 	
 	var bc:BehaviorTreeNode = get_child(0)
 	bc.break_on_debug()
+	bc.print_behavior()
 	bc.tick(delta, _blackboard, result)
 
 

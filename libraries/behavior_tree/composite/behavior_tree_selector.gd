@@ -24,6 +24,7 @@ func tick(delta:float, blackboard: BlackBoard, result:BehaviorTreeResult) -> voi
 	for c in _get_children():
 		var bc:BehaviorTreeNode = c
 		bc.break_on_debug()
+		bc.print_behavior()
 		bc.tick(delta, blackboard, result)
 		if !result.is_failed():
 			break

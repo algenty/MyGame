@@ -14,10 +14,10 @@ func _ready():
 	if node:
 		_node = get_node(node)
 	if !_node:
-		printerr("BTSetBlackBoardFromProp: must set node")
+		DEBUG.error("BTSetBlackBoardFromProp: must set node")
 		return
 	if node_function_name == null or node_function_name == "":
-		printerr("must set node function name")
+		DEBUG.error("must set node function name")
 		return
 
 	_invalid = false

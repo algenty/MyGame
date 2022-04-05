@@ -7,10 +7,30 @@ export(int) var dectector_size = 100
 
 ### VARIABLES ####
 var owner_target_property_available : bool = false
-var body_target : Node = null
+var body_target : Node = null setget set_target, get_target
 
 ### SIGNALS ###
 signal body_detected(body)
+
+
+### ACCESSORS ###
+func set_target(value) -> void :
+	if value != body_target :
+		body_target = value
+		if owner_target_property_available :
+			get_owner_node().target = value
+		if value != null :
+			emit_signal("body_detected", value)
+
+
+func get_target() -> Node :
+	return body_target
+
+
+func get_target_position() -> Vector2 :
+	if has_target() :
+		return body_target.global_position
+	return Vector2.ZERO
 
 
 ### INIT  & UPDATE & EXIT ###
@@ -47,12 +67,7 @@ func has_target() -> bool :
 
 ### EVENTS ###
 func _on_child_body_entered(my_body) -> void :
-	if owner_target_property_available :
-		get_owner_node().target = my_body
-	body_target = my_body
-	emit_signal("body_detected", my_body)
+	set_target(my_body)
 	
 func _on_child_body_exited() -> void :
-	if owner_target_property_available :
-		get_owner_node().target = null
-	body_target = null 
+	set_target(null)

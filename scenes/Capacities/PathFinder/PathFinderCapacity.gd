@@ -193,6 +193,12 @@ func has_path() -> bool :
 	return _path.size() > 0
 
 
+func clear_path() -> void :
+	_path = []
+	$Line2D.points = []
+	_global_target = Vector2.ZERO
+
+
 func get_random_available_points() -> Vector2 :
 	var __random = RandomNumberGenerator.new()
 	__random.randomize()

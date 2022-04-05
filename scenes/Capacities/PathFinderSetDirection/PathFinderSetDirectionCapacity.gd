@@ -30,7 +30,6 @@ onready var _pathfinder : PathFinderCapacity = $PathFinderCapacity
 ### SIGNALS
 signal direction_changed(direction)
 signal target_changed(target)
-signal taken_path_changed(_taken_path)
 signal path_achieved(position)
 
 
@@ -75,6 +74,7 @@ func update_capacity(_delta : float = 0.0) -> void :
 			set_direction(__direction)
 		else :
 			target = Vector2.ZERO
+			_pathfinder.clear_path()
 			emit_signal("path_achieved", _owner_current_postion)
 	else : 
 		pass
@@ -91,11 +91,6 @@ func input_capacity(event):
 			var __target = get_global_mouse_position()
 			if _pathfinder.is_valid_target(__target) :
 				set_target(__target)
-
-
-func on_capacity_enable_changed(value : bool = is_enable()) -> void :
-	.on_capacity_enable_changed(value)
-	$Line2D.visible = is_enable() && is_display()
 
 
 ### ACCESSORS ###
@@ -118,7 +113,6 @@ func set_target(value : Vector2, force : bool = false) -> void :
 		_pathfinder.set_origin(get_owner_node().global_position)
 		_pathfinder.set_target(target, true)
 		set_physics_process(true)
-		clear_taken_points()
 		emit_signal("target_changed", value)
 
 
@@ -132,10 +126,9 @@ func add_taken_point(world_point : Vector2) -> void :
 		emit_signal("taken_path_changed", _taken_path)
 
 
-func clear_taken_points() -> void :
+func clear_taken_path() -> void :
 	_taken_path = []
-	emit_signal("taken_path_changed", _taken_path)
-
+	_line2D.points = _taken_path
 
 ### BUIT-IT ###
 #IN MOTHER CLASS CAPACITY
@@ -151,9 +144,17 @@ func _on_self_direction_changed(__direction) -> void :
 
 
 func _on_self_target_changed(target) -> void :
-	pass
+	clear_taken_path()
 
 
 func _on_self_taken_path_changed(path) -> void :
 	if is_display() :
 		_line2D.points = path
+
+
+func on_capacity_enable_changed(value : bool = is_enable()) -> void :
+	.on_capacity_enable_changed(value)
+	$Line2D.visible = is_enable() && is_display()
+	if not is_enable() :
+		clear_taken_path()
+		_pathfinder.clear_path()
